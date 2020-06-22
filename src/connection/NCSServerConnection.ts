@@ -234,7 +234,7 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 		if (this._disposed) return
 
 		let triggerNextHeartBeat = () => {
-			this._heartBeatsTimer = global.setTimeout(() => {
+			this._heartBeatsTimer = setTimeout(() => {
 				if (!this._disposed) {
 					this._sendHeartBeats()
 				}

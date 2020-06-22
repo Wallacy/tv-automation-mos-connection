@@ -104,7 +104,7 @@ export class MosSocketClient extends EventEmitter {
 
 			// set timer to retry when needed:
 			if (!this._connectionAttemptTimer) {
-				this._connectionAttemptTimer = global.setInterval(() => {
+				this._connectionAttemptTimer = setInterval(() => {
 					this._autoReconnectionAttempt()
 				}, this._reconnectDelay)
 			}
@@ -261,22 +261,32 @@ export class MosSocketClient extends EventEmitter {
 		// if (this._debug) console.log('sending',this._client.name, str)
 
 		// Command timeout:
-		global.setTimeout(() => {
-			if (this._sentMessage && this._sentMessage.msg.messageID === sentMessageId) {
-				if (this._debug) console.log('timeout ' + sentMessageId + ' after ' + this._commandTimeout)
-				if (isRetry) {
-					this._sendReply(sentMessageId, Error('Command timed out'), null)
-					this._timedOutCommands[sentMessageId] = Date.now()
-					this.processQueue()
-				} else {
-					this.executeCommand(message, true)
+		this._commandTimeoutTimer = setTimeout(() => {
+			try {
+				if (this._sentMessage && this._sentMessage.msg.messageID === sentMessageId) {
+					if (this._debug) console.log('timeout ' + sentMessageId + ' after ' + this._commandTimeout)
+					if (isRetry) {
+						this._sendReply(sentMessageId, Error('Command timed out'), null)
+						this._timedOutCommands[sentMessageId] = Date.now()
+						this.processQueue()
+					} else {
+						this.executeCommand(message, true)
+					}
 				}
+			} catch (error) {
+				this.emit('error', `SetTimeout executeCommand ${error}`)
 			}
 		}, this._commandTimeout)
-		this._client.write(buf, 'ucs2')
-		if (this._debug) console.log(`MOS command sent from ${this._description} : ${messageString}\r\nbytes sent: ${this._client.bytesWritten}`)
 
-		this.emit('rawMessage','sent', messageString)
+		try {
+			this._client.write(buf, 'ucs2')
+			if (this._debug) {
+				console.log(`MOS command sent from ${this._description} : ${messageString}\r\nbytes sent: ${this._client.bytesWritten}`)
+			}
+			this.emit('rawMessage', 'sent', messageString)
+		} catch (error) {
+			this.emit('error', `ExecuteCommand ${error}`)
+		}
 	}
 
   /** */
@@ -454,16 +464,19 @@ export class MosSocketClient extends EventEmitter {
 	private _triggerQueueCleanup () {
 		// in case we're in unsync with messages, prevent deadlock:
 		setTimeout(() => {
-			if (this._debug) console.log('QueueCleanup')
-			for (let i = this._queueMessages.length - 1; i >= 0; i--) {
-				let message = this._queueMessages[i]
-				if (Date.now() - message.time > this._commandTimeout) {
+			try {
+				if (this._debug) console.log('QueueCleanup')
+				for (let i = this._queueMessages.length - 1; i >= 0; i--) {
+					let message = this._queueMessages[i]
+					if (Date.now() - message.time > this._commandTimeout) {
 
-					this._sendReply(message.msg.messageID, Error('Command Timeout'), null)
-					this._queueMessages.splice(i, 1)
+						this._sendReply(message.msg.messageID, Error('Command Timeout'), null)
+						this._queueMessages.splice(i, 1)
+					}
 				}
+			} catch (error) {
+				console.error('triggerQueueCleanup - ' + error)
 			}
-
 		}, this._commandTimeout)
 	}
 }
