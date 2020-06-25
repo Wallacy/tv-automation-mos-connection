@@ -407,7 +407,7 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 						message.prepare(mosMessageId)
 						const messageString: string = message.toString()
 						const buf = iconv.encode(messageString, 'utf16-be')
-						client.socket.write(buf, 'usc2')
+						client.socket.write(buf, 'utf16-be')
 
 						this.emit('rawMessage', 'incoming_' + socketID, 'sent', messageString)
 					}
