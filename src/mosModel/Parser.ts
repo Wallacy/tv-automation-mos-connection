@@ -51,7 +51,7 @@ export namespace Parser {
 		if (xml.hasOwnProperty('mosExternalMetadata') && !isEmpty(xml.mosExternalMetadata)) {
 			// TODO: Handle an array of mosExternalMetadata
 			let meta: IMOSExternalMetaData = {
-				MosSchema: xml.mosExternalMetadata.mosSchema,
+				MosSchema: `${xml.mosExternalMetadata.mosSchema}`,
 				MosPayload: xml.mosExternalMetadata.mosPayload
 			}
 			if (xml.mosExternalMetadata.hasOwnProperty('mosScope')) meta.MosScope = xml.mosExternalMetadata.mosScope
@@ -338,7 +338,7 @@ export namespace Parser {
 		return xmlMetadata.map((xmlmd) => {
 			let md: IMOSExternalMetaData = {
 				MosScope: (xmlmd.hasOwnProperty('mosScope') ? xmlmd.mosScope : null),
-				MosSchema: xmlmd.mosSchema + '',
+				MosSchema: `${xmlmd.mosSchema}`,
 				MosPayload: fixPayload(xmlmd.mosPayload)
 			}
 			return md
@@ -551,7 +551,7 @@ export namespace Parser {
 			listReturnStart: xml.listReturnStart,
 			listReturnEnd: xml.listReturnEnd,
 			generalSearch: xml.generalSearch,
-			mosSchema: xml.mosSchema,
+			mosSchema: `${xml.mosSchema}`,
 			searchGroups: []
 		}
 
