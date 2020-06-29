@@ -70,12 +70,16 @@ export namespace Parser {
 	// 	return XMLBuilder.create('ro')
 	// }
 	export function xml2Stories (xml: Array<any>): Array<IMOSROStory> {
+		
 		if (!xml) return []
 		let xmlStories: Array<any> = xml
-		if (!Array.isArray(xmlStories)) xmlStories = [xmlStories]
+		if (!Array.isArray(xmlStories)) {
+			xmlStories = [xmlStories]
+		}
 
 		return xmlStories.map((xmlStory: any) => {
-			return xml2Story(xmlStory)
+			const story = xml2Story(xmlStory)
+			return story
 		})
 	}
 	export function xml2FullStory (xml: any): IMOSROFullStory {
@@ -140,7 +144,9 @@ export namespace Parser {
 		if (!Array.isArray(xmlItems)) xmlItems = [xmlItems]
 
 		return xmlItems.map((xmlItem: any) => {
-			return xml2Item(xmlItem)
+			const item = xml2Item(xmlItem)
+
+			return item
 		})
 	}
 	export function xml2Item (xml: any): IMOSItem {

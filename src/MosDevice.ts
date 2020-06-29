@@ -421,7 +421,7 @@ export class MosDevice implements IMOSDevice {
 					RunningOrderID: new MosString128(data.roElementAction.roID),
 					StoryID: new MosString128((data.roElementAction.element_target || {}).storyID)
 				}
-				let stories: Array<IMOSROStory> = Parser.xml2Stories([data.roElementAction.element_source.story])
+				let stories: Array<IMOSROStory> = Parser.xml2Stories(data.roElementAction.element_source.story)
 				this._callbackOnROInsertStories(action, stories)
 				.then((resp: IMOSROAck) => {
 					let ack = new ROAck()
@@ -460,7 +460,7 @@ export class MosDevice implements IMOSDevice {
 					RunningOrderID: new MosString128(data.roElementAction.roID),
 					StoryID: new MosString128((data.roElementAction.element_target || {}).storyID)
 				}
-				let stories: Array<IMOSROStory> = Parser.xml2Stories([data.roElementAction.element_source.story])
+				let stories: Array<IMOSROStory> = Parser.xml2Stories(data.roElementAction.element_source.story)
 				this._callbackOnROReplaceStories(action, stories).then((resp: IMOSROAck) => {
 					let ack = new ROAck()
 					ack.ID = resp.ID
