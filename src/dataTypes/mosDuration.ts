@@ -1,20 +1,26 @@
 export class MosDuration {
 
-	private _duration: number // seconds
+	private _duration: number = 0 // seconds
 
 	/** */
-	constructor (str: string) {
+	constructor (value: string|number) {
 
-		let m = str.match(/([\d]+):([\d]+):([\d]+)/)
-		if (!m) throw Error('MosDuration: Invalid format!')
-
-		let hh: number = parseInt(m[1], 10)
-		let mm: number = parseInt(m[2], 10)
-		let ss: number = parseInt(m[3], 10)
-
-		if (isNaN(hh) || isNaN(mm) || isNaN(ss)) throw Error('MosDuration: Invalid format!')
-
-		this._duration = hh * 3600 + mm * 60 + ss
+		if(typeof value === "number"){
+			this._duration = value
+		} else if(!isNaN(Number(value))){
+			this._duration = Number(value)
+		} else {
+			let m = value.match(/([\d]+):([\d]+):([\d]+)/)
+			if (!m) throw Error('MosDuration: Invalid format!')
+	
+			let hh: number = parseInt(m[1], 10)
+			let mm: number = parseInt(m[2], 10)
+			let ss: number = parseInt(m[3], 10)
+	
+			if (isNaN(hh) || isNaN(mm) || isNaN(ss)) throw Error('MosDuration: Invalid format!')
+	
+			this._duration = hh * 3600 + mm * 60 + ss
+		}
 	}
 	/** */
 	toString (): string {
