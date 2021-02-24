@@ -3,7 +3,7 @@ import { MosTime } from './dataTypes/mosTime'
 import { MosDuration as MosDurationDataType } from './dataTypes/mosDuration'
 import { MosString128 } from './dataTypes/mosString128'
 import { IMOSExternalMetaData } from './dataTypes/mosExternalMetaData'
-import { IMOSListMachInfo, MOSAck, MosItemReplaceOptions } from './mosModel'
+import { IMOSListMachInfo, MOSAck, MosItemReplaceOptions, RoReqStoryActionOptions } from './mosModel'
 import { MosDevice } from './MosDevice'
 
 // import {IMOSListMachInfo as IMOSP0ListMachineInfo, IMOSListMachInfo} from "./mosModel/0_listMachInfo"
@@ -127,6 +127,9 @@ export interface IMOSDevice {
 	/* Profile 4 */
 	getAllRunningOrders: () => Promise<Array<IMOSRunningOrderBase>> // send roReqAll
 	onROStory: (cb: (story: IMOSROFullStory) => Promise<IMOSROAck>) => void // roStorySend
+
+	/* Profile 7 */
+	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSAck>
 }
 export { IMOSListMachInfo }
 export interface IMOSROAction {
@@ -393,4 +396,4 @@ export enum IMOSObjectPathType {
 	PROXY_PATH = 'PROXY PATH',
 	METADATA_PATH = 'METADATA PATH'
 }
-export { IMOSExternalMetaData }
+export { IMOSExternalMetaData, RoReqStoryActionOptions }

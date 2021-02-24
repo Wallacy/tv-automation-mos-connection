@@ -34,6 +34,7 @@
     "build": "trash dist && yarn build:main",
     "build:main": "tsc -p tsconfig.build.json",
     "lint": "tslint --project tsconfig.json --config tslint.json",
+    "lint-fix": "tslint --fix --project tsconfig.json --config tslint.json",
     "unit": "jest --forceExit",
     "test": "yarn lint && yarn unit",
     "test:integration": "yarn lint && jest --config=jest-integration.config.js",

@@ -49,7 +49,7 @@ Working in dev environment
 ### Profile 2
 * **Implemented**
 ### Profile 3
-* *Not started*
+* *Started*
 ### Profile 4
 * **Implemented**
 ### Profile 5
@@ -57,4 +57,4 @@ Working in dev environment
 ### Profile 6
 * *Not started*
 ### Profile 7
-* *Not started*
+* *Started*

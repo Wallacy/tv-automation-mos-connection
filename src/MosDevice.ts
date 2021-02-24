@@ -53,7 +53,9 @@ import {
 	MosItemReplaceOptions,
 	MosItemReplace,
 	MosReqSearchableSchema,
-	MosReqObjList
+	MosReqObjList,
+	RoReqStoryAction,
+	RoReqStoryActionOptions
 } from './mosModel'
 import { MosMessage } from './mosModel/MosMessage'
 
@@ -1016,6 +1018,12 @@ export class MosDevice implements IMOSDevice {
 	}
 	setDebug (debug: boolean) {
 		this._debug = debug
+	}
+
+	/* Profile 7 */
+	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSAck> {
+		const message = new RoReqStoryAction(options)
+		return this.executeCommand(message)
 	}
 
 	private executeCommand (message: MosMessage, resend?: boolean): Promise<any> {
