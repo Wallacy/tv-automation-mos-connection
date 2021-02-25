@@ -34,7 +34,7 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 	private _debug: boolean = false
 	private _disposed: boolean = false
 
-	private _clients: {[clientID: string]: ClientDescription} = {}
+	private _clients: { [clientID: string]: ClientDescription } = {}
 	private _callbackOnConnectionChange: () => void
 
 	private _heartBeatsTimer: NodeJS.Timer
@@ -81,8 +81,9 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 	connect () {
 		for (let i in this._clients) {
 			// Connect client
-			this.emit('info', `Connect client ${i} on ${this._clients[i].clientDescription} on host ${this._host}`)
-			if (this._debug) console.log(`Connect client ${i} on ${this._clients[i].clientDescription} on host ${this._host}`)
+			const client = this._clients[i]
+			this.emit('info', `Connect client ${i} on ${client && client.clientDescription} on host ${this._host}`)
+			if (this._debug) console.log(`Connect client ${i} on ${client && client.clientDescription} on host ${this._host}`)
 			this._clients[i].client.connect()
 		}
 		this._connected = true
@@ -156,7 +157,7 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 	private _getClients (clientDescription: string): MosSocketClient[] {
 		let clients: MosSocketClient[] = []
 		for (let i in this._clients) {
-			if (this._clients[i].clientDescription === clientDescription) {
+			if (this._clients[i] && this._clients[i].clientDescription === clientDescription) {
 				clients.push(this._clients[i].client)
 			}
 		}
@@ -222,7 +223,7 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 			for (let key in this._clients) {
 				this.removeClient(key)
 			}
-			global.clearTimeout(this._heartBeatsTimer)
+			clearTimeout(this._heartBeatsTimer)
 			this._connected = false
 			if (this._callbackOnConnectionChange) this._callbackOnConnectionChange()
 			resolveDispose()
@@ -235,8 +236,12 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 
 		let triggerNextHeartBeat = () => {
 			this._heartBeatsTimer = setTimeout(() => {
-				if (!this._disposed) {
-					this._sendHeartBeats()
+				try {
+					if (!this._disposed) {
+						this._sendHeartBeats()
+					}
+				} catch (error) {
+					this.emit('error', `_heartBeatsTimer executeCommand ${error}`)
 				}
 			}, this._heartBeatsDelay)
 		}
@@ -246,38 +251,39 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 			Object.keys(this._clients).map((key) => {
 				let client = this._clients[key]
 
-				if (client.useHeartbeats) {
-					let heartbeat = new HeartBeat()
-					heartbeat.port = this._clients[key].clientDescription
+				if (client && client.useHeartbeats) {
+					const clientDescription = client.clientDescription
+					const heartbeat = new HeartBeat()
+					heartbeat.port = clientDescription
 					return this.executeCommand(heartbeat)
-					.then(() => {
-						client.heartbeatConnected = true
-						if (this._debug) console.log(`Heartbeat on ${this._clients[key].clientDescription} received.`)
-					})
-					.catch((e) => {
-						// probably a timeout
-						client.heartbeatConnected = false
-						this.emit('error', `Heartbeat error on ${this._clients[key].clientDescription}: ${e.toString()}`)
-						if (this._debug) console.log(`Heartbeat on ${this._clients[key].clientDescription}: ${e.toString()}`)
-					})
+						.then(() => {
+							client.heartbeatConnected = true
+							if (this._debug) console.log(`Heartbeat on ${clientDescription} received.`)
+						})
+						.catch((e) => {
+							// probably a timeout
+							client.heartbeatConnected = false
+							this.emit('error', `Heartbeat error on ${clientDescription}: ${e.toString()}`)
+							if (this._debug) console.log(`Heartbeat on ${clientDescription}: ${e.toString()}`)
+						})
 				} else {
 					return Promise.resolve()
 				}
 
 			})
 		)
-		.then(() => {
-			if (connected !== this.connected) {
-				if (this._callbackOnConnectionChange) this._callbackOnConnectionChange()
-			}
-			triggerNextHeartBeat()
-		})
-		.catch((e) => {
-			if (connected !== this.connected) {
-				if (this._callbackOnConnectionChange) this._callbackOnConnectionChange()
-			}
-			triggerNextHeartBeat()
-			this.emit('error', e)
-		})
+			.then(() => {
+				if (connected !== this.connected) {
+					if (this._callbackOnConnectionChange) this._callbackOnConnectionChange()
+				}
+				triggerNextHeartBeat()
+			})
+			.catch((e) => {
+				if (connected !== this.connected) {
+					if (this._callbackOnConnectionChange) this._callbackOnConnectionChange()
+				}
+				triggerNextHeartBeat()
+				this.emit('error', e)
+			})
 	}
 }

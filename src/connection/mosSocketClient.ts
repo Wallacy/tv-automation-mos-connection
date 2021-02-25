@@ -150,7 +150,11 @@ export class MosSocketClient extends EventEmitter {
 					// Try again later:
 					clearTimeout(this.processQueueTimeout)
 					this.processQueueTimeout = setTimeout(() => {
-						this.processQueue()
+						try {
+							this.processQueue()
+						} catch (error) {
+							this.emit('error', `processQueueTimeout executeCommand ${error}`)
+						}
 					}, 200)
 				}
 			}
@@ -274,19 +278,18 @@ export class MosSocketClient extends EventEmitter {
 					}
 				}
 			} catch (error) {
-				this.emit('error', `SetTimeout executeCommand ${error}`)
+				this.emit('error', `_commandTimeoutTimer executeCommand ${error}`)
 			}
 		}, this._commandTimeout)
 
-		try {
+		if (this._client) {
 			this._client.write(buf, 'ucs2')
 			if (this._debug) {
 				console.log(`MOS command sent from ${this._description} : ${messageString}\r\nbytes sent: ${this._client.bytesWritten}`)
 			}
 			this.emit('rawMessage', 'sent', messageString)
-		} catch (error) {
-			this.emit('error', `ExecuteCommand ${error}`)
 		}
+
 	}
 
   /** */
@@ -312,7 +315,7 @@ export class MosSocketClient extends EventEmitter {
 		// @todo create event telling reconnection ended with result: true/false
 		// only if reconnection interval is true
 		this._reconnectAttempt = 0
-		global.clearInterval(this._connectionAttemptTimer)
+		clearInterval(this._connectionAttemptTimer)
 		delete this._connectionAttemptTimer
 	}
 
