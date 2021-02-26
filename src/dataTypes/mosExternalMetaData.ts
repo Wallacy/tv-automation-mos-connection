@@ -38,10 +38,14 @@ export class MosExternalMetaData {
 	}
 
 	get messageXMLBlocks (): XMLBuilder.XMLElement {
-		let root = XMLBuilder.create('mosExternalMetadata') // config headless
-		addTextElement(root, 'mosScope', this._scope)
-		addTextElement(root, 'mosSchema', this._schema)
-		addTextElement(root, 'mosPayload', this._payload) // converts json to xml
+		const { create } = XMLBuilder
+		const root = create('mosExternalMetadata') // config headless
+
+		addTextElement(root, 'mosScope', {}, this._scope)
+		addTextElement(root, 'mosSchema', {}, this._schema)
+		const payloadElem = create({ ['mosPayload']: this._payload })
+
+		root.importDocument(payloadElem)
 		return root
 	}
 
