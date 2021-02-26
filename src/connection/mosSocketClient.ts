@@ -80,6 +80,7 @@ export class MosSocketClient extends EventEmitter {
 			if (!this._lastConnectionAttempt || (Date.now() - this._lastConnectionAttempt) >= this._reconnectDelay) { // !_lastReconnectionAttempt (means first attempt) OR time > _reconnectionDelay since last attempt
 				// recreate client if new attempt:
 				if (this._client && this._client.connecting) {
+					this._clearCommandTimeoutTimer()
 					this._client.destroy()
 					this._client.removeAllListeners()
 					delete this._client
@@ -207,6 +208,7 @@ export class MosSocketClient extends EventEmitter {
 		this.connected = false
 		this._shouldBeConnected = false
 		this._clearConnectionAttemptTimer()
+		this._clearCommandTimeoutTimer()
 		if (this._client) {
 			this._client.once('close', () => { this.emit(SocketConnectionEvent.DISPOSED) })
 			this._client.end()
@@ -319,6 +321,11 @@ export class MosSocketClient extends EventEmitter {
 		delete this._connectionAttemptTimer
 	}
 
+	/** */
+	private _clearCommandTimeoutTimer (): void {
+		this._commandTimeoutTimer && clearInterval(this._commandTimeoutTimer)
+		delete this._commandTimeoutTimer
+	}
   /** */
 	// private _onUnhandledCommandTimeout () {
 	// 	global.clearTimeout(this._commandTimeoutTimer)
@@ -399,7 +406,7 @@ export class MosSocketClient extends EventEmitter {
 						if (this._debug) console.log('Got a reply (' + messageId + '), but we haven\'t sent any message', messageString)
 						this.emit('warning', 'Got a reply (' + messageId + '), but we haven\'t sent any message ' + messageString)
 					}
-					clearTimeout(this._commandTimeoutTimer)
+					this._clearCommandTimeoutTimer()
 				} else {
 					// error message?
 					if (parsedData.mos.mosAck && parsedData.mos.mosAck.status === 'NACK') {
