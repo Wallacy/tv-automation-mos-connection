@@ -15,7 +15,7 @@ import {
 	IMosRequestObjectList,
 	IMOSAck
 } from '../api'
-import { IMOSExternalMetaData } from '../dataTypes/mosExternalMetaData'
+import { IMOSExternalMetaData, MosExternalMetaData } from '../dataTypes/mosExternalMetaData'
 import { MosString128 } from '../dataTypes/mosString128'
 import { MosTime } from '../dataTypes/mosTime'
 import { MosDuration } from '../dataTypes/mosDuration'
@@ -357,7 +357,7 @@ export namespace Parser {
 
 		// let payload = parser.toXml(md.MosPayload)  // TODO: implement this properly, convert to xml
 		// let payload = js2xml({ mosExternalMetadata: md }, { compact: true })
-		return XMLBuilder.create({ mosExternalMetadata: md })
+		return new MosExternalMetaData(md).messageXMLBlocks
 		// addTextElement(xmlMD, 'mosPayload', {}, payload)
 		// return xmlMD
 	}

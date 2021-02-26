@@ -354,33 +354,21 @@ Object {
             "_text": "Jonas",
           },
           "mosExternalMetadata": Object {
-            "MosPayload": Object {
-              "Approved": Object {
-                "_text": 0,
-              },
-              "Creator": Object {
-                "_text": "SHOLMES",
-              },
-              "ModBy": Object {
-                "_text": "LJOHNSTON",
-              },
-              "ModTime": Object {
-                "_text": 20010308142001,
-              },
-              "Owner": Object {
-                "_text": "SHOLMES",
-              },
-              "TextTime": Object {
-                "_text": 278,
-              },
-              "mediaTime": Object {
-                "_text": 0,
+            "mosPayload": Object {
+              "_attributes": Object {
+                "Approved": "0",
+                "Creator": "SHOLMES",
+                "ModBy": "LJOHNSTON",
+                "ModTime": "20010308142001",
+                "Owner": "SHOLMES",
+                "TextTime": "278",
+                "mediaTime": "0",
               },
             },
-            "MosSchema": Object {
+            "mosSchema": Object {
               "_text": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>",
             },
-            "MosScope": Object {
+            "mosScope": Object {
               "_text": "STORY",
             },
           },
@@ -515,33 +503,21 @@ Object {
         "_text": "Jonas",
       },
       "mosExternalMetadata": Object {
-        "MosPayload": Object {
-          "Approved": Object {
-            "_text": 0,
-          },
-          "Creator": Object {
-            "_text": "SHOLMES",
-          },
-          "ModBy": Object {
-            "_text": "LJOHNSTON",
-          },
-          "ModTime": Object {
-            "_text": 20010308142001,
-          },
-          "Owner": Object {
-            "_text": "SHOLMES",
-          },
-          "TextTime": Object {
-            "_text": 278,
-          },
-          "mediaTime": Object {
-            "_text": 0,
+        "mosPayload": Object {
+          "_attributes": Object {
+            "Approved": "0",
+            "Creator": "SHOLMES",
+            "ModBy": "LJOHNSTON",
+            "ModTime": "20010308142001",
+            "Owner": "SHOLMES",
+            "TextTime": "278",
+            "mediaTime": "0",
           },
         },
-        "MosSchema": Object {
+        "mosSchema": Object {
           "_text": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>",
         },
-        "MosScope": Object {
+        "mosScope": Object {
           "_text": "STORY",
         },
       },
@@ -1819,27 +1795,19 @@ Object {
               "_text": 310,
             },
             "mosExternalMetadata": Object {
-              "MosPayload": Object {
-                "Owner": Object {
-                  "_text": "SHOLMES",
-                },
-                "destination": Object {
-                  "_text": "b",
-                },
-                "source": Object {
-                  "_text": "a",
-                },
-                "transitionMode": Object {
-                  "_text": 2,
-                },
-                "transitionPoint": Object {
-                  "_text": 463,
+              "mosPayload": Object {
+                "_attributes": Object {
+                  "Owner": "SHOLMES",
+                  "destination": "b",
+                  "source": "a",
+                  "transitionMode": "2",
+                  "transitionPoint": "463",
                 },
               },
-              "MosSchema": Object {
+              "mosSchema": Object {
                 "_text": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
               },
-              "MosScope": Object {
+              "mosScope": Object {
                 "_text": "PLAYLIST",
               },
             },
@@ -1895,27 +1863,19 @@ Object {
               "_text": 200,
             },
             "mosExternalMetadata": Object {
-              "MosPayload": Object {
-                "Owner": Object {
-                  "_text": "SHOLMES",
-                },
-                "destination": Object {
-                  "_text": "b",
-                },
-                "source": Object {
-                  "_text": "a",
-                },
-                "transitionMode": Object {
-                  "_text": 2,
-                },
-                "transitionPoint": Object {
-                  "_text": 463,
+              "mosPayload": Object {
+                "_attributes": Object {
+                  "Owner": "SHOLMES",
+                  "destination": "b",
+                  "source": "a",
+                  "transitionMode": "2",
+                  "transitionPoint": "463",
                 },
               },
-              "MosSchema": Object {
+              "mosSchema": Object {
                 "_text": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
               },
-              "MosScope": Object {
+              "mosScope": Object {
                 "_text": "PLAYLIST",
               },
             },
@@ -1967,15 +1927,9 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
         <itemUserTimingDur>310</itemUserTimingDur>
         <itemTrigger>CHAINED</itemTrigger>
         <mosExternalMetadata>
-          <MosScope>PLAYLIST</MosScope>
-          <MosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</MosSchema>
-          <MosPayload>
-            <Owner>SHOLMES</Owner>
-            <transitionMode>2</transitionMode>
-            <transitionPoint>463</transitionPoint>
-            <source>a</source>
-            <destination>b</destination>
-          </MosPayload>
+          <mosScope>PLAYLIST</mosScope>
+          <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
+          <mosPayload Owner="SHOLMES" transitionMode="2" transitionPoint="463" source="a" destination="b"/>
         </mosExternalMetadata>
       </item>
     </story>
@@ -1991,15 +1945,9 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
         <itemEdDur>310</itemEdDur>
         <itemUserTimingDur>200</itemUserTimingDur>
         <mosExternalMetadata>
-          <MosScope>PLAYLIST</MosScope>
-          <MosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</MosSchema>
-          <MosPayload>
-            <Owner>SHOLMES</Owner>
-            <transitionMode>2</transitionMode>
-            <transitionPoint>463</transitionPoint>
-            <source>a</source>
-            <destination>b</destination>
-          </MosPayload>
+          <mosScope>PLAYLIST</mosScope>
+          <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
+          <mosPayload Owner="SHOLMES" transitionMode="2" transitionPoint="463" source="a" destination="b"/>
         </mosExternalMetadata>
       </item>
     </story>
@@ -2030,15 +1978,9 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
         <itemUserTimingDur>310</itemUserTimingDur>
         <itemTrigger>CHAINED</itemTrigger>
         <mosExternalMetadata>
-          <MosScope>PLAYLIST</MosScope>
-          <MosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</MosSchema>
-          <MosPayload>
-            <Owner>SHOLMES</Owner>
-            <transitionMode>2</transitionMode>
-            <transitionPoint>463</transitionPoint>
-            <source>a</source>
-            <destination>b</destination>
-          </MosPayload>
+          <mosScope>PLAYLIST</mosScope>
+          <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
+          <mosPayload Owner=\\"SHOLMES\\" transitionMode=\\"2\\" transitionPoint=\\"463\\" source=\\"a\\" destination=\\"b\\"/>
         </mosExternalMetadata>
       </item>
     </story>
@@ -2054,15 +1996,9 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
         <itemEdDur>310</itemEdDur>
         <itemUserTimingDur>200</itemUserTimingDur>
         <mosExternalMetadata>
-          <MosScope>PLAYLIST</MosScope>
-          <MosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</MosSchema>
-          <MosPayload>
-            <Owner>SHOLMES</Owner>
-            <transitionMode>2</transitionMode>
-            <transitionPoint>463</transitionPoint>
-            <source>a</source>
-            <destination>b</destination>
-          </MosPayload>
+          <mosScope>PLAYLIST</mosScope>
+          <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
+          <mosPayload Owner=\\"SHOLMES\\" transitionMode=\\"2\\" transitionPoint=\\"463\\" source=\\"a\\" destination=\\"b\\"/>
         </mosExternalMetadata>
       </item>
     </story>
