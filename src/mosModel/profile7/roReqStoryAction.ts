@@ -54,7 +54,7 @@ export class RoReqStoryAction extends MosMessage {
 
 	/** */
 	get messageXMLBlocks (): XMLBuilder.XMLElement {
-		const xml = XMLBuilder.create('mosReqObjAction')
+		const xml = XMLBuilder.create('roReqStoryAction')
 		const xmlStorySend = XMLBuilder.create('roStorySend')
 		const target = XMLBuilder.create('element_target')
 		const source = XMLBuilder.create('element_source')
