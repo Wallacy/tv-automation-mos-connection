@@ -129,7 +129,7 @@ export interface IMOSDevice {
 	onROStory: (cb: (story: IMOSROFullStory) => Promise<IMOSROAck>) => void // roStorySend
 
 	/* Profile 7 */
-	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSAck>
+	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSROAck>
 }
 export { IMOSListMachInfo }
 export interface IMOSROAction {
@@ -194,7 +194,7 @@ export interface IMOSROFullStory extends IMOSStory {
 }
 export interface IMOSROFullStoryBodyItem {
 	Type: string // enum, whatever?
-	Content: any | IMOSItem // maybe not, maybe something else? IMOSItemObject??
+	Content: IMOSItem
 }
 export interface IMOSItem {
 	ID: MosString128

@@ -883,7 +883,7 @@ export class MosDevice implements IMOSDevice {
 		return new Promise((resolve, reject) => {
 			if (this._currentConnection) {
 				this.executeCommand(message).then((data) => {
-					let roAck: ROAck = Parser.xml2ROAck(data.mos.roAck)
+					let roAck = Parser.xml2ROAck(data.mos.roAck)
 					resolve(roAck)
 				}).catch(reject)
 			}
@@ -1021,9 +1021,16 @@ export class MosDevice implements IMOSDevice {
 	}
 
 	/* Profile 7 */
-	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSAck> {
+	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSROAck> {
 		const message = new RoReqStoryAction(options)
-		return this.executeCommand(message)
+		return new Promise((resolve, reject) => {
+			if (this._currentConnection) {
+				this.executeCommand(message).then((data) => {
+					let roAck = Parser.xml2ROAck(data.mos.roAck)
+					resolve(roAck)
+				}).catch(reject)
+			}
+		})
 	}
 
 	private executeCommand (message: MosMessage, resend?: boolean): Promise<any> {
