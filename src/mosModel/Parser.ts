@@ -560,13 +560,14 @@ export namespace Parser {
 		if (xml.storyItem) {
 			let items: Array<any> = xml.storyItem
 			if (!Array.isArray(items)) items = [items]
-			items.forEach((item) => {
+			for (let idx = 0; idx < items.length; idx++) {
+				const item = items[idx]
 				let bodyItem: IMOSROFullStoryBodyItem = {
 					Type: 'storyItem',
-					Content: item
+					Content: xml2Item(item)
 				}
 				body.push(bodyItem)
-			})
+			}
 		}
 		return body
 	}
