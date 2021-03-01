@@ -14,6 +14,12 @@ export interface IConnectionConfig {
 	/** Automatically create new mos-devices on-the-fly when receiving messages to unregistered MOS-ID:s */
 	openRelay?: boolean
 	offspecFailover?: boolean
+	/** (Optional): Custom ports for communication */
+	ports?: {
+		upper?: number;
+		lower?: number;
+		query?: number;
+	}
 }
 
 /** */
@@ -36,6 +42,11 @@ export class ConnectionConfig implements IConnectionConfig {
 	debug: boolean
 	openRelay: boolean
 	offspecFailover: boolean
+	ports: {
+		upper: number;
+		lower: number;
+		query: number;
+	}
 
 	private _profiles: IProfiles = {
 		'0': false,
@@ -64,6 +75,12 @@ export class ConnectionConfig implements IConnectionConfig {
 		this.openRelay				= init.openRelay || false
 		this.offspecFailover		= init.offspecFailover || false
 		this.profiles				= init.profiles
+		this.ports = {
+			lower: 10540,
+			upper: 10541,
+			query: 10542,
+			...init.ports
+		}
 	}
 
 	/** */

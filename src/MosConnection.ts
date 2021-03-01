@@ -42,6 +42,9 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 	constructor (configOptions: IConnectionConfig) {
 		super()
 		this._conf = new ConnectionConfig(configOptions)
+		MosConnection.CONNECTION_PORT_LOWER = this._conf.ports.lower
+		MosConnection.CONNECTION_PORT_UPPER = this._conf.ports.upper
+		MosConnection.CONNECTION_PORT_QUERY = this._conf.ports.query
 
 		if (this._conf.debug) {
 			this._debug = this._conf.debug
