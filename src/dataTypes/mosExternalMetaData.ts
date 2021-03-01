@@ -14,7 +14,6 @@ export enum IMOSScope {
 }
 
 export class MosExternalMetaData {
-
 	private _scope?: IMOSScope
 	private _schema: string
 	private _payload: any
@@ -48,5 +47,4 @@ export class MosExternalMetaData {
 		root.importDocument(payloadElem)
 		return root
 	}
-
 }
