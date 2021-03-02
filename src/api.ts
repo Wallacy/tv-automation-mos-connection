@@ -3,7 +3,7 @@ import { MosTime } from './dataTypes/mosTime'
 import { MosDuration as MosDurationDataType } from './dataTypes/mosDuration'
 import { MosString128 } from './dataTypes/mosString128'
 import { IMOSExternalMetaData } from './dataTypes/mosExternalMetaData'
-import { IMOSListMachInfo, MOSAck, MosItemReplaceOptions, RoReqStoryActionOptions } from './mosModel'
+import { IMOSListMachInfo, MosItemReplaceOptions, RoReqStoryActionOptions } from './mosModel'
 import { MosDevice } from './MosDevice'
 
 // import {IMOSListMachInfo as IMOSP0ListMachineInfo, IMOSListMachInfo} from "./mosModel/0_listMachInfo"
@@ -77,46 +77,108 @@ export interface IMOSDevice {
 	getConnectionStatus: () => IMOSConnectionStatus
 
 	/* Profile 1 */
+	/**
+	 * Contains information that describes a unique MOS Object to the NCS.
+	 * The NCS uses this information to search for and reference the MOS Object.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#mosObj
+	 */
+	sendMOSObject (obj: IMOSObject): Promise<IMOSAck>
+	/**
+	 * Request from the NCS for a description of an Object.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#mosReqObj
+	 */
 	onRequestMOSObject: (cb: (objId: string) => Promise<IMOSObject | null>) => void
-	onRequestAllMOSObjects: (cb: (pause: number) => Promise<Array< IMOSObject> | IMOSAck>) => void
+	/**
+	 * Message used by the NCS to request the description of an object.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#mosReqObj
+	 */
 	getMOSObject: (objId: MosString128) => Promise<IMOSObject>
+	/**
+	 * Request from the NCS for all Objects.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#mosReqAll
+	 */
+	onRequestAllMOSObjects: (cb: () => Promise<Array<IMOSObject>>) => void
+	/**
+	 * Method for the NCS to request the MOS to send it a mosObj message for every Object in the MOS.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#mosReqAll
+	 */
 	getAllMOSObjects: () => Promise<Array<IMOSObject>>
-	setMOSObject (obj: IMOSObject): Promise<IMOSAck>
-	setAllMOSObjects (objs: IMOSObject[]): Promise<IMOSAck>
+	/**
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#mosListAll
+	 * @param objs List of mosObjects to send
+	 */
+	sendAllMOSObjects (objs: IMOSObject[]): Promise<IMOSAck>
 
+	// ============================================================================================
 	/* Profile 2 */
+	/**
+	 * Message received from the NCS to the MOS that defines a new Running Order.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#roCreate
+	 */
 	onCreateRunningOrder: (cb: (ro: IMOSRunningOrder) => Promise<IMOSROAck>) => void
+	/**
+	 * Message from the NCS to the MOS that defines a new Running Order.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#roCreate
+	 */
+	sendCreateRunningOrder: (ro: IMOSRunningOrder) => Promise<IMOSROAck>
+	/**
+	 * Message received from the NCS to the MOS that defines a new Running Order, replacing an existing one.
+	 * http://mosprotocol.com/wp-content/MOS-Protocol-Documents/MOS-Protocol-2.8.4-Current.htm#roReplace
+	 */
 	onReplaceRunningOrder: (cb: (ro: IMOSRunningOrder) => Promise<IMOSROAck>) => void
+	sendReplaceRunningOrder: (ro: IMOSRunningOrder) => Promise<IMOSROAck>
 	onDeleteRunningOrder: (cb: (runningOrderId: MosString128) => Promise<IMOSROAck>) => void
+	sendDeleteRunningOrder: (runningOrderId: MosString128) => Promise<IMOSROAck>
 
 	onRequestRunningOrder: (cb: (runningOrderId: MosString128) => Promise<IMOSRunningOrder | null>) => void // get roReq, send roList
-	getRunningOrder: (runningOrderId: MosString128) => Promise<IMOSRunningOrder | null> // send roReq, get roList
+	sendRequestRunningOrder: (runningOrderId: MosString128) => Promise<IMOSRunningOrder | null> // send roReq, get roList
+	/** @deprecated getRunningOrder is deprecated, use sendRequestRunningOrder instead */
+	getRunningOrder: (runningOrderId: MosString128) => Promise<IMOSRunningOrder | null>
 
 	onMetadataReplace: (cb: (metadata: IMOSRunningOrderBase) => Promise<IMOSROAck>) => void
+	sendMetadataReplace: (metadata: IMOSRunningOrderBase) => Promise<IMOSROAck>
 
 	onRunningOrderStatus: (cb: (status: IMOSRunningOrderStatus) => Promise<IMOSROAck>) => void // get roElementStat
 	onStoryStatus: (cb: (status: IMOSStoryStatus) => Promise<IMOSROAck>) => void // get roElementStat
 	onItemStatus: (cb: (status: IMOSItemStatus) => Promise<IMOSROAck>) => void // get roElementStat
 
-	setRunningOrderStatus: (status: IMOSRunningOrderStatus) => Promise<IMOSROAck> // send roElementStat
-	setStoryStatus: (status: IMOSStoryStatus) => Promise<IMOSROAck> // send roElementStat
-	setItemStatus: (status: IMOSItemStatus) => Promise<IMOSROAck> // send roElementStat
+	/** @deprecated setRunningOrderStatus is deprecated, use sendRunningOrderStatus instead */
+	setRunningOrderStatus: (status: IMOSRunningOrderStatus) => Promise<IMOSROAck>
+	/** @deprecated setStoryStatus is deprecated, use sendStoryStatus instead */
+	setStoryStatus: (status: IMOSStoryStatus) => Promise<IMOSROAck>
+	/** @deprecated setItemStatus is deprecated, use sendItemStatus instead */
+	setItemStatus: (status: IMOSItemStatus) => Promise<IMOSROAck>
+
+	sendRunningOrderStatus: (status: IMOSRunningOrderStatus) => Promise<IMOSROAck> // send roElementStat
+	sendStoryStatus: (status: IMOSStoryStatus) => Promise<IMOSROAck> // send roElementStat
+	sendItemStatus: (status: IMOSItemStatus) => Promise<IMOSROAck> // send roElementStat
 
 	onReadyToAir: (cb: (Action: IMOSROReadyToAir) => Promise<IMOSROAck>) => void
+	sendReadyToAir: (Action: IMOSROReadyToAir) => Promise<IMOSROAck>
 
 	onROInsertStories: (cb: (Action: IMOSStoryAction, Stories: Array<IMOSROStory>) => Promise<IMOSROAck>) => void
+	sendROInsertStories: (Action: IMOSStoryAction, Stories: Array<IMOSROStory>) => Promise<IMOSROAck>
 	onROInsertItems: (cb: (Action: IMOSItemAction, Items: Array<IMOSItem>) => Promise<IMOSROAck>) => void
+	sendROInsertItems: (Action: IMOSItemAction, Items: Array<IMOSItem>) => Promise<IMOSROAck>
 	onROReplaceStories: (cb: (Action: IMOSStoryAction, Stories: Array<IMOSROStory>) => Promise<IMOSROAck>) => void
+	sendROReplaceStories: (Action: IMOSStoryAction, Stories: Array<IMOSROStory>) => Promise<IMOSROAck>
 	onROReplaceItems: (cb: (Action: IMOSItemAction, Items: Array<IMOSItem>) => Promise<IMOSROAck>) => void
+	sendROReplaceItems: (Action: IMOSItemAction, Items: Array<IMOSItem>) => Promise<IMOSROAck>
 	onROMoveStories: (cb: (Action: IMOSStoryAction, Stories: Array<MosString128>) => Promise<IMOSROAck>) => void
+	sendROMoveStories: (Action: IMOSStoryAction, Stories: Array<MosString128>) => Promise<IMOSROAck>
 	onROMoveItems: (cb: (Action: IMOSItemAction, Items: Array<MosString128>) => Promise<IMOSROAck>) => void
+	sendROMoveItems: (Action: IMOSItemAction, Items: Array<MosString128>) => Promise<IMOSROAck>
 	onRODeleteStories: (cb: (Action: IMOSROAction, Stories: Array<MosString128>) => Promise<IMOSROAck>) => void
+	sendRODeleteStories: (Action: IMOSROAction, Stories: Array<MosString128>) => Promise<IMOSROAck>
 	onRODeleteItems: (cb: (Action: IMOSStoryAction, Items: Array<MosString128>) => Promise<IMOSROAck>) => void
+	sendRODeleteItems: (Action: IMOSStoryAction, Items: Array<MosString128>) => Promise<IMOSROAck>
 	onROSwapStories: (cb: (Action: IMOSROAction, StoryID0: MosString128, StoryID1: MosString128) => Promise<IMOSROAck>) => void
+	sendROSwapStories: (Action: IMOSROAction, StoryID0: MosString128, StoryID1: MosString128) => Promise<IMOSROAck>
 	onROSwapItems: (cb: (Action: IMOSStoryAction, ItemID0: MosString128, ItemID1: MosString128) => Promise<IMOSROAck>) => void
+	sendROSwapItems: (Action: IMOSStoryAction, ItemID0: MosString128, ItemID1: MosString128) => Promise<IMOSROAck>
 	/* Profile 3 */
 	onMosObjCreate: (cb: (object: IMOSObject) => Promise<IMOSAck>) => void
-	mosObjCreate: (object: IMOSObject) => Promise<MOSAck>
+	mosObjCreate: (object: IMOSObject) => Promise<IMOSAck>
 	onMosItemReplace: (cb: (roID: MosString128, storyID: MosString128, item: IMOSItem) => Promise<IMOSROAck>) => void
 	mosItemReplace: (options: MosItemReplaceOptions) => Promise<IMOSROAck>
 	onMosReqSearchableSchema: (cb: (username: string) => Promise<IMOSSearchableSchema>) => void
@@ -125,11 +187,10 @@ export interface IMOSDevice {
 	mosRequestObjectList: (reqObjList: IMosRequestObjectList) => Promise<IMosObjectList>
 	onMosReqObjectAction: (cb: (action: string, obj: IMOSObject) => Promise<IMOSAck>) => void
 	/* Profile 4 */
+	onROReqAll: (cb: () => Promise<IMOSRunningOrder[]>) => void
 	getAllRunningOrders: () => Promise<Array<IMOSRunningOrderBase>> // send roReqAll
 	onROStory: (cb: (story: IMOSROFullStory) => Promise<IMOSROAck>) => void // roStorySend
-
-	/* Profile 7 */
-	roReqStoryAction (options: RoReqStoryActionOptions): Promise<IMOSROAck>
+	sendROStory: (story: IMOSROFullStory) => Promise<IMOSROAck>// roStorySend
 }
 export { IMOSListMachInfo }
 export interface IMOSROAction {

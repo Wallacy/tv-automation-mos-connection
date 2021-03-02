@@ -9,11 +9,15 @@ export interface IConnectionConfig {
 	accepsConnectionsFrom?: string[]
 	/** A list of which profile this mos device is to support */
 	profiles: IProfiles
+	/** If true, this device is assumed to be an NCS (server). Defaults to a MOS (client). */
+	isNCS?: boolean
 	/** Debugging-mode: logs raw mos-messages */
 	debug?: boolean
 	/** Automatically create new mos-devices on-the-fly when receiving messages to unregistered MOS-ID:s */
 	openRelay?: boolean
 	offspecFailover?: boolean
+	/** If set to true, a strict check is performed to ensure that all required callbacks are set up for specified profiles */
+	strict?: boolean
 	/** (Optional): Custom ports for communication */
 	ports?: {
 		upper?: number;
@@ -42,6 +46,7 @@ export class ConnectionConfig implements IConnectionConfig {
 	debug: boolean
 	openRelay: boolean
 	offspecFailover: boolean
+	strict?: boolean
 	ports: {
 		upper: number;
 		lower: number;

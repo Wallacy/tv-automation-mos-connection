@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MosDevice: Profile 1 getAllMOSObjects 1`] = `
+exports[`Profile 1 getAllMOSObjects 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -11,7 +11,7 @@ exports[`MosDevice: Profile 1 getAllMOSObjects 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 1 getAllMOSObjects 2`] = `
+exports[`Profile 1 getAllMOSObjects 2`] = `
 Array [
   Object {
     "AirStatus": undefined,
@@ -183,7 +183,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 1 getMOSObject 1`] = `
+exports[`Profile 1 getMOSObject 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -194,7 +194,7 @@ exports[`MosDevice: Profile 1 getMOSObject 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 1 getMOSObject 2`] = `
+exports[`Profile 1 getMOSObject 2`] = `
 Object {
   "AirStatus": "READY",
   "Changed": MosTime {
@@ -329,159 +329,26 @@ Object {
 }
 `;
 
-exports[`MosDevice: Profile 1 onRequestAllMOSObjects 1`] = `
+exports[`Profile 1 onRequestAllMOSObjects 1`] = `
 Array [
   Array [],
 ]
 `;
 
-exports[`MosDevice: Profile 1 onRequestAllMOSObjects 2`] = `
+exports[`Profile 1 onRequestAllMOSObjects 2`] = `
 Object {
   "mos": Object {
     "messageID": Object {
       "_text": 1637,
     },
+    "mosAck": Object {
+      "objID": Object {},
+      "objRev": Object {},
+      "status": Object {},
+      "statusDescription": Object {},
+    },
     "mosID": Object {
       "_text": "our.mos.id",
-    },
-    "mosListAll": Object {
-      "mosObj": Array [
-        Object {
-          "created": Object {
-            "_text": "2019-01-01T17:14:42,000",
-          },
-          "createdBy": Object {
-            "_text": "Jonas",
-          },
-          "mosExternalMetadata": Object {
-            "mosPayload": Object {
-              "Approved": Object {
-                "_text": 0,
-              },
-              "Creator": Object {
-                "_text": "SHOLMES",
-              },
-              "ModBy": Object {
-                "_text": "LJOHNSTON",
-              },
-              "ModTime": Object {
-                "_text": 20010308142001,
-              },
-              "Owner": Object {
-                "_text": "SHOLMES",
-              },
-              "TextTime": Object {
-                "_text": 278,
-              },
-              "mediaTime": Object {
-                "_text": 0,
-              },
-            },
-            "mosSchema": Object {
-              "_text": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>",
-            },
-            "mosScope": Object {
-              "_text": "STORY",
-            },
-          },
-          "objAir": Object {
-            "_text": "READY",
-          },
-          "objDur": Object {
-            "_text": 1500,
-          },
-          "objID": Object {
-            "_text": "M000123",
-          },
-          "objPaths": Object {
-            "objMetadataPath": Object {
-              "_attributes": Object {
-                "techDescription": "MOS Object",
-              },
-              "_text": "http://server/proxy/clipe.xml",
-            },
-            "objPath": Object {
-              "_attributes": Object {
-                "techDescription": "MPEG2 Video",
-              },
-              "_text": "\\\\server\\\\media\\\\clip392028cd2320s0d.mxf",
-            },
-            "objProxyPath": Object {
-              "_attributes": Object {
-                "techDescription": "WM9 750Kbps",
-              },
-              "_text": "http://server/proxy/clipe.wmv",
-            },
-          },
-          "objRev": Object {
-            "_text": 1,
-          },
-          "objSlug": Object {
-            "_text": "My new object",
-          },
-          "objTB": Object {
-            "_text": 50,
-          },
-          "objType": Object {
-            "_text": "VIDEO",
-          },
-          "status": Object {
-            "_text": "READY",
-          },
-        },
-        Object {
-          "created": Object {
-            "_text": "2019-01-01T17:14:42,000",
-          },
-          "createdBy": Object {
-            "_text": "Jonas",
-          },
-          "objAir": Object {
-            "_text": "READY",
-          },
-          "objDur": Object {
-            "_text": 1000,
-          },
-          "objID": Object {
-            "_text": "M0003523",
-          },
-          "objPaths": Object {
-            "objMetadataPath": Object {
-              "_attributes": Object {
-                "techDescription": "MOS Object",
-              },
-              "_text": "http://server/proxy/clipe.xml",
-            },
-            "objPath": Object {
-              "_attributes": Object {
-                "techDescription": "MPEG2 Video",
-              },
-              "_text": "\\\\servermediaclip392028cd2320s0d.mxf",
-            },
-            "objProxyPath": Object {
-              "_attributes": Object {
-                "techDescription": "WM9 750Kbps",
-              },
-              "_text": "http://server/proxy/clipe.wmv",
-            },
-          },
-          "objRev": Object {
-            "_text": 1,
-          },
-          "objSlug": Object {
-            "_text": "My new object 2",
-          },
-          "objTB": Object {
-            "_text": 50,
-          },
-          "objType": Object {
-            "_text": "VIDEO",
-          },
-          "status": Object {
-            "_text": "READY",
-          },
-        },
-      ],
     },
     "ncsID": Object {
       "_text": "their.mos.id",
@@ -490,7 +357,87 @@ Object {
 }
 `;
 
-exports[`MosDevice: Profile 1 onRequestMOSObject 1`] = `
+exports[`Profile 1 onRequestAllMOSObjects 3`] = `
+Object {
+  "mos": Object {
+    "messageID": 86,
+    "mosID": "our.mos.id",
+    "mosListAll": Object {
+      "mosObj": Array [
+        Object {
+          "created": "2019-01-01T17:14:42,000",
+          "createdBy": "Jonas",
+          "mosExternalMetadata": Object {
+            "mosPayload": Object {
+              "Approved": 0,
+              "Creator": "SHOLMES",
+              "ModBy": "LJOHNSTON",
+              "ModTime": 20010308142001,
+              "Owner": "SHOLMES",
+              "TextTime": 278,
+              "mediaTime": 0,
+              "text": 0,
+            },
+            "mosSchema": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>",
+            "mosScope": "STORY",
+          },
+          "objAir": "READY",
+          "objDur": 1500,
+          "objID": "M000123",
+          "objPaths": Object {
+            "objMetadataPath": Object {
+              "techDescription": "MOS Object",
+              "text": "http://server/proxy/clipe.xml",
+            },
+            "objPath": Object {
+              "techDescription": "MPEG2 Video",
+              "text": "\\\\server\\\\media\\\\clip392028cd2320s0d.mxf",
+            },
+            "objProxyPath": Object {
+              "techDescription": "WM9 750Kbps",
+              "text": "http://server/proxy/clipe.wmv",
+            },
+          },
+          "objRev": 1,
+          "objSlug": "My new object",
+          "objTB": 50,
+          "objType": "VIDEO",
+          "status": "READY",
+        },
+        Object {
+          "created": "2019-01-01T17:14:42,000",
+          "createdBy": "Jonas",
+          "objAir": "READY",
+          "objDur": 1000,
+          "objID": "M0003523",
+          "objPaths": Object {
+            "objMetadataPath": Object {
+              "techDescription": "MOS Object",
+              "text": "http://server/proxy/clipe.xml",
+            },
+            "objPath": Object {
+              "techDescription": "MPEG2 Video",
+              "text": "\\\\servermediaclip392028cd2320s0d.mxf",
+            },
+            "objProxyPath": Object {
+              "techDescription": "WM9 750Kbps",
+              "text": "http://server/proxy/clipe.wmv",
+            },
+          },
+          "objRev": 1,
+          "objSlug": "My new object 2",
+          "objTB": 50,
+          "objType": "VIDEO",
+          "status": "READY",
+        },
+      ],
+    },
+    "ncsID": "their.mos.id",
+  },
+}
+`;
+
+exports[`Profile 1 onRequestMOSObject 1`] = `
 Array [
   Array [
     "M000123",
@@ -498,7 +445,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 1 onRequestMOSObject 2`] = `
+exports[`Profile 1 onRequestMOSObject 2`] = `
 Object {
   "mos": Object {
     "messageID": Object {
@@ -597,127 +544,7 @@ Object {
 }
 `;
 
-exports[`MosDevice: Profile 2 getRunningOrder 1`] = `
-"<mos>
-  <ncsID>their.mos.id</ncsID>
-  <mosID>our.mos.id</mosID>
-  <messageID>xx</messageID>
-  <roReq>
-    <roID>M000123</roID>
-  </roReq>
-</mos>"
-`;
-
-exports[`MosDevice: Profile 2 getRunningOrder 2`] = `
-Object {
-  "ID": MosString128 {
-    "_str": "96857485",
-  },
-  "Slug": MosString128 {
-    "_str": "5PM RUNDOWN",
-  },
-  "Stories": Array [
-    Object {
-      "ID": MosString128 {
-        "_str": "5983A501:0049B924:8390EF2B",
-      },
-      "Items": Array [
-        Object {
-          "EditorialDuration": 645,
-          "ID": MosString128 {
-            "_str": "0",
-          },
-          "MOSID": "testmos.enps.com",
-          "MosExternalMetaData": Array [
-            Object {
-              "MosPayload": Object {
-                "Owner": "SHOLMES",
-                "destination": "b",
-                "source": "a",
-                "transitionMode": 2,
-                "transitionPoint": 463,
-              },
-              "MosSchema": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
-              "MosScope": "PLAYLIST",
-            },
-          ],
-          "ObjectID": MosString128 {
-            "_str": "M000224",
-          },
-          "Paths": Array [
-            Object {
-              "Description": "MPEG2 Video",
-              "Target": "\\\\servermediaclip392028cd2320s0d.mxf",
-              "Type": "PATH",
-            },
-            Object {
-              "Description": "WM9 750Kbps",
-              "Target": "http://server/proxy/clipe.wmv",
-              "Type": "PROXY PATH",
-            },
-            Object {
-              "Description": "MOS Object",
-              "Target": "http://server/proxy/clipe.xml",
-              "Type": "METADATA PATH",
-            },
-          ],
-          "Slug": MosString128 {
-            "_str": "COLSTAT MURDER:VO",
-          },
-          "Trigger": "CHAINED",
-          "UserTimingDuration": 310,
-        },
-      ],
-      "Number": MosString128 {
-        "_str": "B10",
-      },
-      "Slug": MosString128 {
-        "_str": "Colstat Murder",
-      },
-    },
-    Object {
-      "ID": MosString128 {
-        "_str": "3854737F:0003A34D:983A0B28",
-      },
-      "Items": Array [
-        Object {
-          "EditorialDuration": 310,
-          "EditorialStart": 55,
-          "ID": MosString128 {
-            "_str": "0",
-          },
-          "MOSID": "testmos.enps.com",
-          "MosExternalMetaData": Array [
-            Object {
-              "MosPayload": Object {
-                "Owner": "SHOLMES",
-                "destination": "b",
-                "source": "a",
-                "transitionMode": 2,
-                "transitionPoint": 463,
-              },
-              "MosSchema": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
-              "MosScope": "PLAYLIST",
-            },
-          ],
-          "ObjectID": MosString128 {
-            "_str": "M000133",
-          },
-          "UserTimingDuration": 310,
-        },
-      ],
-      "Number": MosString128 {
-        "_str": "B11",
-      },
-      "Slug": MosString128 {
-        "_str": "Test MOS",
-      },
-    },
-  ],
-}
-`;
-
-exports[`MosDevice: Profile 2 onCreateRunningOrder 1`] = `
+exports[`Profile 2 onCreateRunningOrder 1`] = `
 Array [
   Array [
     Object {
@@ -839,7 +666,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onCreateRunningOrder: <mos>
+exports[`Profile 2 onCreateRunningOrder: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1638</messageID>
@@ -859,7 +686,7 @@ exports[`MosDevice: Profile 2 onCreateRunningOrder: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onDeleteRunningOrder 1`] = `
+exports[`Profile 2 onDeleteRunningOrder 1`] = `
 Array [
   Array [
     49478285,
@@ -867,7 +694,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onDeleteRunningOrder: <mos>
+exports[`Profile 2 onDeleteRunningOrder: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1640</messageID>
@@ -887,7 +714,7 @@ exports[`MosDevice: Profile 2 onDeleteRunningOrder: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onItemStatus 1`] = `
+exports[`Profile 2 onItemStatus 1`] = `
 Array [
   Array [
     Object {
@@ -918,7 +745,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onItemStatus: <mos>
+exports[`Profile 2 onItemStatus: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1645</messageID>
@@ -938,7 +765,7 @@ exports[`MosDevice: Profile 2 onItemStatus: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onMetadataReplace 1`] = `
+exports[`Profile 2 onMetadataReplace 1`] = `
 Array [
   Array [
     Object {
@@ -975,7 +802,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onMetadataReplace: <mos>
+exports[`Profile 2 onMetadataReplace: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1642</messageID>
@@ -995,7 +822,7 @@ exports[`MosDevice: Profile 2 onMetadataReplace: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onRODeleteItems 1`] = `
+exports[`Profile 2 onRODeleteItems 1`] = `
 Array [
   Array [
     Object {
@@ -1018,7 +845,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onRODeleteItems: <mos>
+exports[`Profile 2 onRODeleteItems: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1655</messageID>
@@ -1038,7 +865,7 @@ exports[`MosDevice: Profile 2 onRODeleteItems: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onRODeleteStories 1`] = `
+exports[`Profile 2 onRODeleteStories 1`] = `
 Array [
   Array [
     Object {
@@ -1055,7 +882,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onRODeleteStories: <mos>
+exports[`Profile 2 onRODeleteStories: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1654</messageID>
@@ -1075,7 +902,7 @@ exports[`MosDevice: Profile 2 onRODeleteStories: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROInsertItems 1`] = `
+exports[`Profile 2 onROInsertItems 1`] = `
 Array [
   Array [
     Object {
@@ -1127,7 +954,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROInsertItems: <mos>
+exports[`Profile 2 onROInsertItems: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1648</messageID>
@@ -1147,7 +974,7 @@ exports[`MosDevice: Profile 2 onROInsertItems: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROInsertStories 1`] = `
+exports[`Profile 2 onROInsertStories 1`] = `
 Array [
   Array [
     Object {
@@ -1217,7 +1044,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROInsertStories: <mos>
+exports[`Profile 2 onROInsertStories: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1647</messageID>
@@ -1237,7 +1064,7 @@ exports[`MosDevice: Profile 2 onROInsertStories: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROMoveItems 1`] = `
+exports[`Profile 2 onROMoveItems 1`] = `
 Array [
   Array [
     Object {
@@ -1263,7 +1090,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROMoveItems: <mos>
+exports[`Profile 2 onROMoveItems: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1653</messageID>
@@ -1283,7 +1110,7 @@ exports[`MosDevice: Profile 2 onROMoveItems: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROMoveStories 1`] = `
+exports[`Profile 2 onROMoveStories 1`] = `
 Array [
   Array [
     Object {
@@ -1306,7 +1133,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROMoveStories: <mos>
+exports[`Profile 2 onROMoveStories: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1652</messageID>
@@ -1326,7 +1153,7 @@ exports[`MosDevice: Profile 2 onROMoveStories: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROMoveStory 1`] = `
+exports[`Profile 2 onROMoveStory 1`] = `
 Array [
   Array [
     Object {
@@ -1346,7 +1173,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROMoveStory: <mos>
+exports[`Profile 2 onROMoveStory: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1651</messageID>
@@ -1366,7 +1193,7 @@ exports[`MosDevice: Profile 2 onROMoveStory: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROReplaceItems 1`] = `
+exports[`Profile 2 onROReplaceItems 1`] = `
 Array [
   Array [
     Object {
@@ -1418,7 +1245,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROReplaceItems: <mos>
+exports[`Profile 2 onROReplaceItems: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1650</messageID>
@@ -1438,7 +1265,7 @@ exports[`MosDevice: Profile 2 onROReplaceItems: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROReplaceStories 1`] = `
+exports[`Profile 2 onROReplaceStories 1`] = `
 Array [
   Array [
     Object {
@@ -1508,7 +1335,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROReplaceStories: <mos>
+exports[`Profile 2 onROReplaceStories: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1649</messageID>
@@ -1528,7 +1355,7 @@ exports[`MosDevice: Profile 2 onROReplaceStories: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROSwapItems 1`] = `
+exports[`Profile 2 onROSwapItems 1`] = `
 Array [
   Array [
     Object {
@@ -1549,7 +1376,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROSwapItems: <mos>
+exports[`Profile 2 onROSwapItems: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1657</messageID>
@@ -1569,7 +1396,7 @@ exports[`MosDevice: Profile 2 onROSwapItems: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onROSwapStories 1`] = `
+exports[`Profile 2 onROSwapStories 1`] = `
 Array [
   Array [
     Object {
@@ -1587,7 +1414,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onROSwapStories: <mos>
+exports[`Profile 2 onROSwapStories: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1656</messageID>
@@ -1607,7 +1434,7 @@ exports[`MosDevice: Profile 2 onROSwapStories: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onReadyToAir 1`] = `
+exports[`Profile 2 onReadyToAir 1`] = `
 Array [
   Array [
     Object {
@@ -1620,7 +1447,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onReadyToAir: <mos>
+exports[`Profile 2 onReadyToAir: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1646</messageID>
@@ -1640,7 +1467,7 @@ exports[`MosDevice: Profile 2 onReadyToAir: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onReplaceRunningOrder 1`] = `
+exports[`Profile 2 onReplaceRunningOrder 1`] = `
 Array [
   Array [
     Object {
@@ -1753,7 +1580,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onReplaceRunningOrder: <mos>
+exports[`Profile 2 onReplaceRunningOrder: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1639</messageID>
@@ -1773,7 +1600,7 @@ exports[`MosDevice: Profile 2 onReplaceRunningOrder: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onRequestRunningOrder 1`] = `
+exports[`Profile 2 onRequestRunningOrder 1`] = `
 Array [
   Array [
     96857485,
@@ -1781,7 +1608,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onRequestRunningOrder 2`] = `
+exports[`Profile 2 onRequestRunningOrder 2`] = `
 Object {
   "mos": Object {
     "messageID": Object {
@@ -1942,7 +1769,7 @@ Object {
 }
 `;
 
-exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
+exports[`Profile 2 onRequestRunningOrder: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1641</messageID>
@@ -1955,19 +1782,13 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
       <storyNum>A5</storyNum>
       <item>
         <itemID>0</itemID>
-        <itemSlug>COLSTAT MURDER:VO</itemSlug>
         <objID>M000224</objID>
         <mosID>testmos.enps.com</mosID>
-        <objPaths>
-          <objPath techDescription="MPEG2 Video">\\servermediaclip392028cd2320s0d.mxf</objPath>
-          <objProxyPath techDescription="WM9 750Kbps">http://server/proxy/clipe.wmv</objProxyPath>
-          <objMetadataPath techDescription="MOS Object">http://server/proxy/clipe.xml</objMetadataPath>
-        </objPaths>
+        <itemSlug>COLSTAT MURDER:VO</itemSlug>
         <itemEdDur>645</itemEdDur>
         <itemUserTimingDur>310</itemUserTimingDur>
         <itemTrigger>CHAINED</itemTrigger>
         <mosExternalMetadata>
-          <mosScope>PLAYLIST</mosScope>
           <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
           <mosPayload>
             <Owner>SHOLMES</Owner>
@@ -1976,7 +1797,13 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
             <source>a</source>
             <destination>b</destination>
           </mosPayload>
+          <mosScope>PLAYLIST</mosScope>
         </mosExternalMetadata>
+        <objPaths>
+          <objPath techDescription="MPEG2 Video">\\servermediaclip392028cd2320s0d.mxf</objPath>
+          <objProxyPath techDescription="WM9 750Kbps">http://server/proxy/clipe.wmv</objProxyPath>
+          <objMetadataPath techDescription="MOS Object">http://server/proxy/clipe.xml</objMetadataPath>
+        </objPaths>
       </item>
     </story>
     <story>
@@ -1991,7 +1818,6 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
         <itemEdDur>310</itemEdDur>
         <itemUserTimingDur>200</itemUserTimingDur>
         <mosExternalMetadata>
-          <mosScope>PLAYLIST</mosScope>
           <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
           <mosPayload>
             <Owner>SHOLMES</Owner>
@@ -2000,6 +1826,7 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
             <source>a</source>
             <destination>b</destination>
           </mosPayload>
+          <mosScope>PLAYLIST</mosScope>
         </mosExternalMetadata>
       </item>
     </story>
@@ -2018,19 +1845,13 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
       <storyNum>A5</storyNum>
       <item>
         <itemID>0</itemID>
-        <itemSlug>COLSTAT MURDER:VO</itemSlug>
         <objID>M000224</objID>
         <mosID>testmos.enps.com</mosID>
-        <objPaths>
-          <objPath techDescription=\\"MPEG2 Video\\">\\\\servermediaclip392028cd2320s0d.mxf</objPath>
-          <objProxyPath techDescription=\\"WM9 750Kbps\\">http://server/proxy/clipe.wmv</objProxyPath>
-          <objMetadataPath techDescription=\\"MOS Object\\">http://server/proxy/clipe.xml</objMetadataPath>
-        </objPaths>
+        <itemSlug>COLSTAT MURDER:VO</itemSlug>
         <itemEdDur>645</itemEdDur>
         <itemUserTimingDur>310</itemUserTimingDur>
         <itemTrigger>CHAINED</itemTrigger>
         <mosExternalMetadata>
-          <mosScope>PLAYLIST</mosScope>
           <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
           <mosPayload>
             <Owner>SHOLMES</Owner>
@@ -2039,7 +1860,13 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
             <source>a</source>
             <destination>b</destination>
           </mosPayload>
+          <mosScope>PLAYLIST</mosScope>
         </mosExternalMetadata>
+        <objPaths>
+          <objPath techDescription=\\"MPEG2 Video\\">\\\\servermediaclip392028cd2320s0d.mxf</objPath>
+          <objProxyPath techDescription=\\"WM9 750Kbps\\">http://server/proxy/clipe.wmv</objProxyPath>
+          <objMetadataPath techDescription=\\"MOS Object\\">http://server/proxy/clipe.xml</objMetadataPath>
+        </objPaths>
       </item>
     </story>
     <story>
@@ -2054,7 +1881,6 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
         <itemEdDur>310</itemEdDur>
         <itemUserTimingDur>200</itemUserTimingDur>
         <mosExternalMetadata>
-          <mosScope>PLAYLIST</mosScope>
           <mosSchema>http://MOSA4.com/mos/supported_schemas/MOSAXML2.08</mosSchema>
           <mosPayload>
             <Owner>SHOLMES</Owner>
@@ -2063,6 +1889,7 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
             <source>a</source>
             <destination>b</destination>
           </mosPayload>
+          <mosScope>PLAYLIST</mosScope>
         </mosExternalMetadata>
       </item>
     </story>
@@ -2070,7 +1897,7 @@ exports[`MosDevice: Profile 2 onRequestRunningOrder: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onRunningOrderStatus 1`] = `
+exports[`Profile 2 onRunningOrderStatus 1`] = `
 Array [
   Array [
     Object {
@@ -2089,7 +1916,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onRunningOrderStatus: <mos>
+exports[`Profile 2 onRunningOrderStatus: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1643</messageID>
@@ -2109,7 +1936,7 @@ exports[`MosDevice: Profile 2 onRunningOrderStatus: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 onStoryStatus 1`] = `
+exports[`Profile 2 onStoryStatus 1`] = `
 Array [
   Array [
     Object {
@@ -2131,7 +1958,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 2 onStoryStatus: <mos>
+exports[`Profile 2 onStoryStatus: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1644</messageID>
@@ -2151,7 +1978,7 @@ exports[`MosDevice: Profile 2 onStoryStatus: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 setItemStatus 1`] = `
+exports[`Profile 2 sendItemStatus 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2168,7 +1995,7 @@ exports[`MosDevice: Profile 2 setItemStatus 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 setItemStatus 2`] = `
+exports[`Profile 2 sendItemStatus 2`] = `
 Object {
   "ID": MosString128 {
     "_str": "96857485",
@@ -2190,10 +2017,131 @@ Object {
       "Items": Array [],
     },
   ],
+  "port": "upper",
 }
 `;
 
-exports[`MosDevice: Profile 2 setRunningOrderStatus 1`] = `
+exports[`Profile 2 sendRequestRunningOrder 1`] = `
+"<mos>
+  <ncsID>their.mos.id</ncsID>
+  <mosID>our.mos.id</mosID>
+  <messageID>xx</messageID>
+  <roReq>
+    <roID>M000123</roID>
+  </roReq>
+</mos>"
+`;
+
+exports[`Profile 2 sendRequestRunningOrder 2`] = `
+Object {
+  "ID": MosString128 {
+    "_str": "96857485",
+  },
+  "Slug": MosString128 {
+    "_str": "5PM RUNDOWN",
+  },
+  "Stories": Array [
+    Object {
+      "ID": MosString128 {
+        "_str": "5983A501:0049B924:8390EF2B",
+      },
+      "Items": Array [
+        Object {
+          "EditorialDuration": 645,
+          "ID": MosString128 {
+            "_str": "0",
+          },
+          "MOSID": "testmos.enps.com",
+          "MosExternalMetaData": Array [
+            Object {
+              "MosPayload": Object {
+                "Owner": "SHOLMES",
+                "destination": "b",
+                "source": "a",
+                "transitionMode": 2,
+                "transitionPoint": 463,
+              },
+              "MosSchema": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
+              "MosScope": "PLAYLIST",
+            },
+          ],
+          "ObjectID": MosString128 {
+            "_str": "M000224",
+          },
+          "Paths": Array [
+            Object {
+              "Description": "MPEG2 Video",
+              "Target": "\\\\servermediaclip392028cd2320s0d.mxf",
+              "Type": "PATH",
+            },
+            Object {
+              "Description": "WM9 750Kbps",
+              "Target": "http://server/proxy/clipe.wmv",
+              "Type": "PROXY PATH",
+            },
+            Object {
+              "Description": "MOS Object",
+              "Target": "http://server/proxy/clipe.xml",
+              "Type": "METADATA PATH",
+            },
+          ],
+          "Slug": MosString128 {
+            "_str": "COLSTAT MURDER:VO",
+          },
+          "Trigger": "CHAINED",
+          "UserTimingDuration": 310,
+        },
+      ],
+      "Number": MosString128 {
+        "_str": "B10",
+      },
+      "Slug": MosString128 {
+        "_str": "Colstat Murder",
+      },
+    },
+    Object {
+      "ID": MosString128 {
+        "_str": "3854737F:0003A34D:983A0B28",
+      },
+      "Items": Array [
+        Object {
+          "EditorialDuration": 310,
+          "EditorialStart": 55,
+          "ID": MosString128 {
+            "_str": "0",
+          },
+          "MOSID": "testmos.enps.com",
+          "MosExternalMetaData": Array [
+            Object {
+              "MosPayload": Object {
+                "Owner": "SHOLMES",
+                "destination": "b",
+                "source": "a",
+                "transitionMode": 2,
+                "transitionPoint": 463,
+              },
+              "MosSchema": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
+              "MosScope": "PLAYLIST",
+            },
+          ],
+          "ObjectID": MosString128 {
+            "_str": "M000133",
+          },
+          "UserTimingDuration": 310,
+        },
+      ],
+      "Number": MosString128 {
+        "_str": "B11",
+      },
+      "Slug": MosString128 {
+        "_str": "Test MOS",
+      },
+    },
+  ],
+}
+`;
+
+exports[`Profile 2 sendRunningOrderStatus 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2206,7 +2154,7 @@ exports[`MosDevice: Profile 2 setRunningOrderStatus 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 setRunningOrderStatus 2`] = `
+exports[`Profile 2 sendRunningOrderStatus 2`] = `
 Object {
   "ID": MosString128 {
     "_str": "96857485",
@@ -2228,10 +2176,11 @@ Object {
       "Items": Array [],
     },
   ],
+  "port": "upper",
 }
 `;
 
-exports[`MosDevice: Profile 2 setStoryStatus 1`] = `
+exports[`Profile 2 sendStoryStatus 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2245,7 +2194,7 @@ exports[`MosDevice: Profile 2 setStoryStatus 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 2 setStoryStatus 2`] = `
+exports[`Profile 2 sendStoryStatus 2`] = `
 Object {
   "ID": MosString128 {
     "_str": "96857485",
@@ -2267,10 +2216,11 @@ Object {
       "Items": Array [],
     },
   ],
+  "port": "upper",
 }
 `;
 
-exports[`MosDevice: Profile 3 mosItemReplace 1`] = `
+exports[`Profile 3 mosItemReplace 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2280,46 +2230,41 @@ exports[`MosDevice: Profile 3 mosItemReplace 1`] = `
     <storyID>storyY</storyID>
     <item>
       <itemID>abc</itemID>
-      <itemSlug>my cool Object</itemSlug>
       <objID>Object0</objID>
       <mosID>our.mos.id</mosID>
+      <itemSlug>my cool Object</itemSlug>
     </item>
   </mosItemReplace>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 mosItemReplace 2`] = `
+exports[`Profile 3 mosItemReplace 2`] = `
 Object {
-  "mos": Object {
-    "messageID": 999,
-    "mosID": "our.mos.id",
-    "ncsID": "their.mos.id",
-    "roAck": Object {
-      "itemChannel": "A",
-      "itemID": Array [
-        0,
-        0,
-      ],
-      "objID": Array [
-        "M000224",
-        "M000133",
-      ],
-      "roID": 96857485,
-      "roStatus": "Unknown object M000133",
-      "status": Array [
-        "LOADED",
-        "UNKNOWN",
-      ],
-      "storyID": Array [
-        "5983A501:0049B924:8390EF2B",
-        "3854737F:0003A34D:983A0B28",
-      ],
-    },
+  "ID": MosString128 {
+    "_str": "96857485",
   },
+  "Status": MosString128 {
+    "_str": "Unknown object M000133",
+  },
+  "Stories": Array [
+    Object {
+      "ID": MosString128 {
+        "_str": "5983A501:0049B924:8390EF2B",
+      },
+      "Items": Array [],
+    },
+    Object {
+      "ID": MosString128 {
+        "_str": "3854737F:0003A34D:983A0B28",
+      },
+      "Items": Array [],
+    },
+  ],
+  "port": "upper",
 }
 `;
 
-exports[`MosDevice: Profile 3 mosObjCreate 1`] = `
+exports[`Profile 3 mosObjCreate 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2339,38 +2284,20 @@ exports[`MosDevice: Profile 3 mosObjCreate 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 mosObjCreate 2`] = `
+exports[`Profile 3 mosObjCreate 2`] = `
 Object {
-  "mos": Object {
-    "messageID": 999,
-    "mosID": "our.mos.id",
-    "ncsID": "their.mos.id",
-    "roAck": Object {
-      "itemChannel": "A",
-      "itemID": Array [
-        0,
-        0,
-      ],
-      "objID": Array [
-        "M000224",
-        "M000133",
-      ],
-      "roID": 96857485,
-      "roStatus": "Unknown object M000133",
-      "status": Array [
-        "LOADED",
-        "UNKNOWN",
-      ],
-      "storyID": Array [
-        "5983A501:0049B924:8390EF2B",
-        "3854737F:0003A34D:983A0B28",
-      ],
-    },
+  "Description": MosString128 {
+    "_str": "",
   },
+  "ID": MosString128 {
+    "_str": "M000123",
+  },
+  "Revision": 1,
+  "Status": "ACK",
 }
 `;
 
-exports[`MosDevice: Profile 3 mosReqSearchableSchema 1`] = `
+exports[`Profile 3 mosReqSearchableSchema 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2379,7 +2306,7 @@ exports[`MosDevice: Profile 3 mosReqSearchableSchema 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 mosReqSearchableSchema 2`] = `
+exports[`Profile 3 mosReqSearchableSchema 2`] = `
 Object {
   "mosSchema": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
   "text": "http://MOSA4.com/mos/supported_schemas/MOSAXML2.08",
@@ -2387,7 +2314,7 @@ Object {
 }
 `;
 
-exports[`MosDevice: Profile 3 mosRequestObjectList 1`] = `
+exports[`Profile 3 mosRequestObjectList 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -2403,7 +2330,7 @@ exports[`MosDevice: Profile 3 mosRequestObjectList 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 mosRequestObjectList 2`] = `
+exports[`Profile 3 mosRequestObjectList 2`] = `
 Object {
   "list": Array [
     Object {
@@ -2799,7 +2726,7 @@ Object {
 }
 `;
 
-exports[`MosDevice: Profile 3 onMosItemReplace 1`] = `
+exports[`Profile 3 onMosItemReplace 1`] = `
 Array [
   Array [
     undefined,
@@ -2855,7 +2782,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 3 onMosItemReplace: <mos>
+exports[`Profile 3 onMosItemReplace: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1659</messageID>
@@ -2875,7 +2802,7 @@ exports[`MosDevice: Profile 3 onMosItemReplace: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 onMosObjCreate 1`] = `
+exports[`Profile 3 onMosObjCreate 1`] = `
 Array [
   Array [
     Object {
@@ -2983,7 +2910,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 3 onMosObjCreate: <mos>
+exports[`Profile 3 onMosObjCreate: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1658</messageID>
@@ -3007,7 +2934,7 @@ exports[`MosDevice: Profile 3 onMosObjCreate: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 onMosReqObjectAction 1`] = `
+exports[`Profile 3 onMosReqObjectAction 1`] = `
 Array [
   Array [
     "NEW",
@@ -3116,7 +3043,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 3 onMosReqObjectAction: <mos>
+exports[`Profile 3 onMosReqObjectAction: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1662</messageID>
@@ -3140,7 +3067,7 @@ exports[`MosDevice: Profile 3 onMosReqObjectAction: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 onMosReqObjectList 1`] = `
+exports[`Profile 3 onMosReqObjectList 1`] = `
 Array [
   Array [
     Object {
@@ -3197,7 +3124,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 3 onMosReqObjectList: <mos>
+exports[`Profile 3 onMosReqObjectList: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1661</messageID>
@@ -3221,7 +3148,7 @@ exports[`MosDevice: Profile 3 onMosReqObjectList: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 3 onMosReqSearchableSchema 1`] = `
+exports[`Profile 3 onMosReqSearchableSchema 1`] = `
 Array [
   Array [
     "jbob",
@@ -3229,7 +3156,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 3 onMosReqSearchableSchema: <mos>
+exports[`Profile 3 onMosReqSearchableSchema: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1660</messageID>
@@ -3247,7 +3174,7 @@ exports[`MosDevice: Profile 3 onMosReqSearchableSchema: <mos>
 </mos>"
 `;
 
-exports[`MosDevice: Profile 4 getAllRunningOrders 1`] = `
+exports[`Profile 4 getAllRunningOrders 1`] = `
 "<mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
@@ -3256,7 +3183,7 @@ exports[`MosDevice: Profile 4 getAllRunningOrders 1`] = `
 </mos>"
 `;
 
-exports[`MosDevice: Profile 4 getAllRunningOrders 2`] = `
+exports[`Profile 4 getAllRunningOrders 2`] = `
 Array [
   Object {
     "EditorialDuration": MosDuration {
@@ -3331,7 +3258,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 4 onROStory 1`] = `
+exports[`Profile 4 onROStory 1`] = `
 Array [
   Array [
     Object {
@@ -3968,7 +3895,7 @@ Array [
 ]
 `;
 
-exports[`MosDevice: Profile 4 onROStory: <mos>
+exports[`Profile 4 onROStory: <mos>
   <ncsID>their.mos.id</ncsID>
   <mosID>our.mos.id</mosID>
   <messageID>1663</messageID>

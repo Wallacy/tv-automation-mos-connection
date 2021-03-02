@@ -33,7 +33,7 @@ export interface IMOSListMachInfo {
 	mosRev: MosString128     // MOS Revision: Text description. 128 chars max.
 
 	supportedProfiles: {
-		deviceType: string,                 // deviceType="NCS"
+		deviceType: 'NCS' | 'MOS',
 		profile0?: boolean,
 		profile1?: boolean,
 		profile2?: boolean,
@@ -53,30 +53,35 @@ export class ListMachineInfo extends MosMessage {
 	info: IMOSListMachInfo
 
   /** */
-	constructor (info: IMOSListMachInfo) {
-		super()
+	constructor (info: IMOSListMachInfo, port: 'upper' | 'lower') {
+		super(port)
 		this.info = info
 	}
 
   /** */
 	get messageXMLBlocks (): XMLBuilder.XMLElement {
 
-		let root = XMLBuilder.create('listMachInfo')
-		addTextElement(root, 'manufacturer', this.info.manufacturer)
-		addTextElement(root, 'model', this.info.model)
-		addTextElement(root, 'hwRev', this.info.hwRev)
-		addTextElement(root, 'swRev', this.info.swRev)
-		addTextElement(root, 'DOM', this.info.DOM)
-		addTextElement(root, 'SN', this.info.SN)
-		addTextElement(root, 'ID', this.info.ID)
-		addTextElement(root, 'time', this.info.time)
-		if (this.info.opTime) addTextElement(root, 'opTime', this.info.opTime)
-		addTextElement(root, 'mosRev', this.info.mosRev)
+		let xmlListMachInfo = XMLBuilder.create('listMachInfo')
+		addTextElement(xmlListMachInfo, 'manufacturer', this.info.manufacturer)
+		addTextElement(xmlListMachInfo, 'model', this.info.model)
+		addTextElement(xmlListMachInfo, 'hwRev', this.info.hwRev)
+		addTextElement(xmlListMachInfo, 'swRev', this.info.swRev)
+		addTextElement(xmlListMachInfo, 'DOM', this.info.DOM)
+		addTextElement(xmlListMachInfo, 'SN', this.info.SN)
+		addTextElement(xmlListMachInfo, 'ID', this.info.ID)
+		addTextElement(xmlListMachInfo, 'time', this.info.time)
+		if (this.info.opTime) addTextElement(xmlListMachInfo, 'opTime', this.info.opTime)
+		addTextElement(xmlListMachInfo, 'mosRev', this.info.mosRev)
 
-		let p = addTextElement(root, 'supportedProfiles').att('deviceType', this.info.supportedProfiles.deviceType)
+		// TODO: the supportedProfiles should be changed to an Array
+
+		const xmlSupportedProfiles = XMLBuilder.create('supportedProfiles')
+		xmlSupportedProfiles.att('deviceType', this.info.supportedProfiles.deviceType)
+		// let p = addTextElement(root, 'supportedProfiles').att('deviceType', this.info.supportedProfiles.deviceType)
 		for (let i = 0; i < 8; i++) {
-			addTextElement(p, 'mosProfile', ((this as any).info.supportedProfiles['profile' + i] ? 'YES' : 'NO')).att('number', i)
+			addTextElement(xmlSupportedProfiles, 'mosProfile', ((this as any).info.supportedProfiles['profile' + i] ? 'YES' : 'NO')).att('number', i)
 		}
-		return root
+		xmlListMachInfo.importDocument(xmlSupportedProfiles)
+		return xmlListMachInfo
 	}
 }

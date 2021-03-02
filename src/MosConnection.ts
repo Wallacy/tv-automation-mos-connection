@@ -265,7 +265,7 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 		}
 		return 'Warning: Not MOS compatible'
 	}
-	public setDebug (debug: boolean) {
+	public setDebug (debug: boolean): void {
 		this._debug = debug
 
 		this.getDevices().forEach((device: MosDevice) => {
@@ -289,7 +289,7 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 	): MosDevice {
 		let id0 = myMosID + '_' + theirMosId0
 		let id1 = (theirMosId1 ? myMosID + '_' + theirMosId1 : null)
-		let mosDevice = new MosDevice(id0, id1, this._conf, primary, secondary, this._conf.offspecFailover)
+		let mosDevice = new MosDevice(id0, id1, this._conf, primary, secondary, this._conf.offspecFailover, this._conf.strict)
 		mosDevice.setDebug(this._debug)
 		// Add mosDevice to register:
 		if (this._mosDevices[id0]) {
@@ -313,8 +313,8 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 			return Promise.reject('Not configured for accepting connections')
 		}
 
-		let initSocket = (port: number, description: IncomingConnectionType) => {
-			let socketServer = new MosSocketServer(port, description)
+		let initSocket = (port: number, portType: IncomingConnectionType) => {
+			let socketServer = new MosSocketServer(port, portType)
 			socketServer.on(SocketServerEvent.CLIENT_CONNECTED, (e: SocketDescription) => this._registerIncomingClient(e))
 			socketServer.on(SocketServerEvent.ERROR, (e) => {
 				// handle error
@@ -418,7 +418,32 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 						// No MOS-device found in the register
 						// Register a new mosDevice to use for this connection:
 						if (ncsID === this._conf.mosID) {
-							mosDevice = this._registerMosDevice(this._conf.mosID, mosID, null, null, null)
+							// Setup a "primary" connection back to the mos-device, so that we can automatically
+							// send commands to it through the mosDevice
+
+							let primary = new NCSServerConnection(
+								mosID,
+								remoteAddress,
+								this._conf.mosID,
+								undefined,
+								this._debug
+							)
+							this._ncsConnections[remoteAddress] = primary
+
+							primary.on('rawMessage', (type: string, message: string) => {
+								this.emit('rawMessage', 'primary', type, message)
+							})
+							primary.on('warning', (str: string) => {
+								this.emit('warning', 'primary: ' + str)
+							})
+							primary.on('error', (str: string) => {
+								this.emit('error', 'primary: ' + str)
+							})
+
+							primary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_LOWER, 'lower', true)
+							primary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_UPPER, 'upper', true)
+
+							mosDevice = this._registerMosDevice(this._conf.mosID, mosID, null, primary, null)
 						} else if (mosID === this._conf.mosID) {
 							mosDevice = await this.connect({
 								primary: {
@@ -429,7 +454,8 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 						}
 					}
 					if (mosDevice) {
-						mosDevice.routeData(parsed).then((message: MosMessage) => {
+
+						mosDevice.routeData(parsed, client.portDescription).then((message: MosMessage) => {
 							sendReply(message)
 						}).catch((err: Error | MosMessage) => {
 							// Something went wrong
@@ -458,7 +484,7 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 						let msg = new MOSAck()
 						msg.ID = new MosString128(0)
 						msg.Revision = 0
-						msg.Description = new MosString128('MosDevice not found')
+						msg.Description = new MosString128(`MosDevice "${ncsID + '_' + mosID}" not found`)
 						msg.Status = IMOSAckStatus.NACK
 						sendReply(msg) // TODO: Need tests
 					}

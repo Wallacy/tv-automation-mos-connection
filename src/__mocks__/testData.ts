@@ -32,7 +32,7 @@ test('At least one test', () => {
 	expect(2).toBe(2)
 })
 
-let xmlData = {
+const xmlData = {
 	'heartbeat': '<heartbeat>\</heartbeat>',
 	'reqObj': '<mosReqObj>\
 		<objID>M000123</objID>\
@@ -971,10 +971,16 @@ let xmlData = {
             </mosExternalMetadata>
         </mosObj>
     </list>
-</mosObjList>`
+</mosObjList>`,
+	'mosAck': `<mosAck>
+        <objID>M000123</objID>
+        <objRev>1</objRev>
+        <status>ACK</status>
+        <statusDescription></statusDescription>
+</mosAck>`
 }
 
-let xmlApiData = {
+const xmlApiData = {
 	'mosObj': literal<IMOSObject>({
 		ID: new MosString128('M000123'),
 		Slug: new MosString128('My new object'),

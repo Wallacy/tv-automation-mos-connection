@@ -16,17 +16,17 @@ export class MOSAck extends MosMessage implements IMOSAck {
 
   /** */
 	constructor () {
-		super()
+		super('lower')
 	}
 
   /** */
 	get messageXMLBlocks (): XMLBuilder.XMLElement {
 		let root = XMLBuilder.create('mosAck')
 
-		addTextElement(root, 'objID', {}, this.ID)
-		addTextElement(root, 'objRev', {}, this.Revision)
-		addTextElement(root, 'status', {}, (IMOSAckStatus as any)[this.Status])
-		addTextElement(root, 'statusDescription', {}, this.Description)
+		addTextElement(root, 'objID', this.ID)
+		addTextElement(root, 'objRev', this.Revision)
+		addTextElement(root, 'status', (IMOSAckStatus as any)[this.Status])
+		addTextElement(root, 'statusDescription', this.Description)
 
 		return root
 	}
