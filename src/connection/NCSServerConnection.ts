@@ -252,17 +252,17 @@ export class NCSServerConnection extends EventEmitter implements INCSServerConne
 				let client = this._clients[key]
 
 				if (client.useHeartbeats) {
-					let heartbeat = new HeartBeat(this._clients[key].clientDescription)
+					let heartbeat = new HeartBeat(client.clientDescription)
 					return this.executeCommand(heartbeat)
 						.then(() => {
 							client.heartbeatConnected = true
-							if (this._debug) console.log(`Heartbeat on ${clientDescription} received.`)
+							if (this._debug) console.log(`Heartbeat on ${client.clientDescription} received.`)
 						})
 						.catch((e) => {
 							// probably a timeout
 							client.heartbeatConnected = false
-							this.emit('error', `Heartbeat error on ${clientDescription}: ${e.toString()}`)
-							if (this._debug) console.log(`Heartbeat on ${clientDescription}: ${e.toString()}`)
+							this.emit('error', `Heartbeat error on ${client.clientDescription}: ${e.toString()}`)
+							if (this._debug) console.log(`Heartbeat on ${client.clientDescription}: ${e.toString()}`)
 						})
 				} else {
 					return Promise.resolve()

@@ -255,7 +255,7 @@ export interface IMOSROFullStory extends IMOSStory {
 }
 export interface IMOSROFullStoryBodyItem {
 	Type: string // enum, whatever?
-	Content: IMOSItem
+	Content: IMOSItem | string
 }
 export interface IMOSItem {
 	ID: MosString128
@@ -313,9 +313,9 @@ export interface IMOSROAckObject {
 
 // /** */
 export interface IMOSConnectionStatus {
- 	PrimaryConnected: boolean
+	PrimaryConnected: boolean
 	PrimaryStatus: string // if not connected this will contain human-readable error-message
- 	SecondaryConnected: boolean
+	SecondaryConnected: boolean
 	SecondaryStatus: string // if not connected this will contain human-readable error-message
 }
 

@@ -40,8 +40,8 @@ export class MosExternalMetaData {
 		const { create } = XMLBuilder
 		const root = create('mosExternalMetadata') // config headless
 
-		addTextElement(root, 'mosScope', {}, this._scope)
-		addTextElement(root, 'mosSchema', {}, this._schema)
+		addTextElement(root, 'mosScope', this._scope)
+		addTextElement(root, 'mosSchema', this._schema)
 		const payloadElem = create({ ['mosPayload']: this._payload })
 
 		root.importDocument(payloadElem)

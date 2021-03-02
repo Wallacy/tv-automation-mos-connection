@@ -1,4 +1,3 @@
-import * as XMLBuilder from 'xmlbuilder'
 import {
 	IMOSRunningOrder,
 	IMOSROStory,
@@ -10,7 +9,7 @@ import {
 	IMosRequestObjectList,
 	IMOSAck
 } from '../api'
-import { IMOSExternalMetaData, MosExternalMetaData } from '../dataTypes/mosExternalMetaData'
+import { IMOSExternalMetaData } from '../dataTypes/mosExternalMetaData'
 import { MosString128 } from '../dataTypes/mosString128'
 import {
 	XMLRunningOrderBase,
@@ -29,7 +28,6 @@ import { XMLMosAck, XMLMosObjects, XMLMosObject, XMLMosRequestObjectList } from 
 import { ROAck } from './profile2/ROAck'
 
 export namespace Parser {
-
 	export function xml2ROBase (xml: any): IMOSRunningOrderBase {
 		return XMLRunningOrderBase.fromXML(xml)
 	}
@@ -69,18 +67,6 @@ export namespace Parser {
 	// }
 	export function xml2MetaData (xml: any): Array<IMOSExternalMetaData> {
 		return XMLMosExternalMetaData.fromXML(xml)
-	}
-	export function metaData2xml (md: IMOSExternalMetaData): XMLBuilder.XMLElement {
-		// let xmlMD = XMLBuilder.create('mosExternalMetadata')
-
-		// if (md.MosScope) addTextElement(xmlMD, 'mosScope', {}, md.MosScope)
-		// addTextElement(xmlMD, 'mosSchema', {}, md.MosSchema)
-
-		// let payload = parser.toXml(md.MosPayload)  // TODO: implement this properly, convert to xml
-		// let payload = js2xml({ mosExternalMetadata: md }, { compact: true })
-		return new MosExternalMetaData(md).messageXMLBlocks
-		// addTextElement(xmlMD, 'mosPayload', {}, payload)
-		// return xmlMD
 	}
 	export function xml2IDs (xml: any): Array<MosString128> {
 		return XMLMosIDs.fromXML(xml)

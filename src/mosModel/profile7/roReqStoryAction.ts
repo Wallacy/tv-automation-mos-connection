@@ -4,7 +4,7 @@ import { IMOSItem, IMOSROStory, MosDuration } from '../../api'
 import { MosMessage } from '../MosMessage'
 import { MosString128 } from '../../dataTypes/mosString128'
 import { addTextElement } from '../../utils/Utils'
-import { Parser } from '../Parser'
+import { XMLMosItem, XMLROStory } from '../profile2/xmlConversion'
 
 interface BaseOptions {
 	roID: MosString128
@@ -47,9 +47,8 @@ export class RoReqStoryAction extends MosMessage {
 	private options: RoReqStoryActionOptions
 	/** */
 	constructor (options: RoReqStoryActionOptions) {
-		super()
+		super('upper')
 		this.options = options
-		this.port = 'upper'
 	}
 
 	/** */
@@ -63,23 +62,21 @@ export class RoReqStoryAction extends MosMessage {
 		xml.att('leaseLock', this.options.leaseLock)
 		xml.att('username', this.options.username)
 
-		addTextElement(xmlStorySend, 'roID', {}, this.options.roID)
+		addTextElement(xmlStorySend, 'roID', this.options.roID)
 
 		switch (this.options.action) {
 			case 'NEW': {
 				const { story, item, targetStoryID, targetItemID } = this.options
 
 				if (item) {
-					const itemElem = Parser.item2xml(item)
-					source.importDocument(itemElem)
+					XMLMosItem.toXML(source, item)
 
-					targetStoryID && addTextElement(target, 'storyID', {}, targetStoryID)
-					targetItemID && addTextElement(target, 'itemID', {}, targetItemID)
+					targetStoryID && addTextElement(target, 'storyID', targetStoryID)
+					targetItemID && addTextElement(target, 'itemID', targetItemID)
 				} else if (story) {
-					const storyElem = Parser.story2xml(story)
-					source.importDocument(storyElem)
+					XMLROStory.toXML(source, story)
 
-					targetStoryID && addTextElement(target, 'storyID', {}, targetStoryID)
+					targetStoryID && addTextElement(target, 'storyID', targetStoryID)
 				}
 
 				break
@@ -89,17 +86,15 @@ export class RoReqStoryAction extends MosMessage {
 
 				// ADD Story
 				if (story) {
-					addTextElement(target, 'storyID', {}, storyID || story.ID)
-					const storyElem = Parser.story2xml(story)
-					source.importDocument(storyElem)
+					addTextElement(target, 'storyID', storyID || story.ID)
+					XMLROStory.toXML(source, story)
 				}
 
 				// ADD Item
 				if (storyID && item) {
-					addTextElement(target, 'storyID', {}, storyID)
-					addTextElement(target, 'itemID', {}, item.ID)
-					const itemElem = Parser.item2xml(item)
-					source.importDocument(itemElem)
+					addTextElement(target, 'storyID', storyID)
+					addTextElement(target, 'itemID', item.ID)
+					XMLMosItem.toXML(source, item)
 				}
 
 				xmlStorySend.importDocument(target)
@@ -110,13 +105,13 @@ export class RoReqStoryAction extends MosMessage {
 				const { storyID, itemID, targetItemID, targetStoryID } = this.options
 
 				if (itemID) {
-					addTextElement(source, 'storyID', {}, storyID)
-					addTextElement(source, 'itemID', {}, itemID)
-					targetStoryID && addTextElement(target, 'storyID', {}, targetStoryID)
-					targetItemID && addTextElement(target, 'itemID', {}, targetItemID)
+					addTextElement(source, 'storyID', storyID)
+					addTextElement(source, 'itemID', itemID)
+					targetStoryID && addTextElement(target, 'storyID', targetStoryID)
+					targetItemID && addTextElement(target, 'itemID', targetItemID)
 				} else {
-					addTextElement(source, 'storyID', {}, storyID)
-					targetStoryID && addTextElement(target, 'storyID', {}, targetStoryID)
+					addTextElement(source, 'storyID', storyID)
+					targetStoryID && addTextElement(target, 'storyID', targetStoryID)
 				}
 
 				break
@@ -125,14 +120,14 @@ export class RoReqStoryAction extends MosMessage {
 			case 'DELETE': {
 				const { storyID, itemID } = this.options
 
-				addTextElement(xmlStorySend, 'storyID', {}, storyID)
+				addTextElement(xmlStorySend, 'storyID', storyID)
 
 				if (itemID) {
-					addTextElement(target, 'storyID', {}, storyID)
-					addTextElement(source, 'itemID', {}, itemID)
+					addTextElement(target, 'storyID', storyID)
+					addTextElement(source, 'itemID', itemID)
 					xmlStorySend.importDocument(source)
 				} else {
-					addTextElement(source, 'storyID', {}, storyID)
+					addTextElement(source, 'storyID', storyID)
 				}
 				break
 			}
