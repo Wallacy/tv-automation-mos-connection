@@ -33,8 +33,8 @@ export class MosSocketClient extends EventEmitter {
 	private _commandTimeoutTimer: NodeJS.Timer
 	private _commandTimeout: number
 
-	private _queueCallback: {[messageId: string]: CallBackFunction} = {}
-	private _lingeringCallback: {[messageId: string]: CallBackFunction} = {} // for lingering messages
+	private _queueCallback: { [messageId: string]: CallBackFunction } = {}
+	private _lingeringCallback: { [messageId: string]: CallBackFunction } = {} // for lingering messages
 	private _queueMessages: Array<QueueMessage> = []
 
 	private _sentMessage: QueueMessage | null = null // sent message, waiting for reply
@@ -46,7 +46,7 @@ export class MosSocketClient extends EventEmitter {
 	private _startingUp: boolean = true
 	private dataChunks: string = ''
 
-  /** */
+	/** */
 	constructor (host: string, port: number, description: string, timeout?: number, debug?: boolean) {
 		super()
 		this._host = host
@@ -57,22 +57,22 @@ export class MosSocketClient extends EventEmitter {
 
 	}
 
-  /** */
+	/** */
 	set autoReconnect (autoReconnect: boolean) {
 		this._autoReconnect = autoReconnect
 	}
 
-  /** */
+	/** */
 	set autoReconnectInterval (autoReconnectInterval: number) {
 		this._reconnectDelay = autoReconnectInterval
 	}
 
-  /** */
+	/** */
 	set autoReconnectAttempts (autoReconnectAttempts: number) {
 		this._reconnectAttempts = autoReconnectAttempts
 	}
 
-  /** */
+	/** */
 	connect (): void {
 		// prevent manipulation of active socket
 		if (!this.connected) {
@@ -115,7 +115,7 @@ export class MosSocketClient extends EventEmitter {
 		}
 	}
 
-  /** */
+	/** */
 	disconnect (): void {
 		this.dispose()
 	}
@@ -186,7 +186,7 @@ export class MosSocketClient extends EventEmitter {
 		return queue
 	}
 
-  /** */
+	/** */
 	get host (): string {
 		if (this._client) {
 			return this._host
@@ -194,7 +194,7 @@ export class MosSocketClient extends EventEmitter {
 		return this._host
 	}
 
-  /** */
+	/** */
 	get port (): number {
 		if (this._client) {
 			return this._port
@@ -202,7 +202,7 @@ export class MosSocketClient extends EventEmitter {
 		return this._port
 	}
 
-  /** */
+	/** */
 	dispose (): void {
 		// this._readyToSendMessage = false
 		this.connected = false
@@ -217,22 +217,22 @@ export class MosSocketClient extends EventEmitter {
 		}
 	}
 
-  /**
-   * convenience wrapper to expose all logging calls to parent object
-   */
+	/**
+	 * convenience wrapper to expose all logging calls to parent object
+	 */
 	log (args: any): void {
 		if (this._debug) console.log(args)
 	}
 	public setDebug (debug: boolean) {
 		this._debug = debug
 	}
-  /** */
+	/** */
 	private set connected (connected: boolean) {
 		this._connected = connected === true
 		this.emit(SocketConnectionEvent.CONNECTED)
 	}
 
-  /** */
+	/** */
 	private get connected (): boolean {
 		return this._connected
 	}
@@ -251,7 +251,7 @@ export class MosSocketClient extends EventEmitter {
 		delete this._lingeringCallback[messageId + '']
 	}
 
-  /** */
+	/** */
 	private executeCommand (message: QueueMessage, isRetry?: boolean): void {
 		if (this._sentMessage && !isRetry) throw Error('executeCommand: there already is a sent Command!')
 
@@ -294,7 +294,7 @@ export class MosSocketClient extends EventEmitter {
 
 	}
 
-  /** */
+	/** */
 	private _autoReconnectionAttempt (): void {
 		if (this._autoReconnect) {
 			if (this._reconnectAttempts > -1) {								// no reconnection if no valid reconnectionAttemps is set
@@ -326,13 +326,13 @@ export class MosSocketClient extends EventEmitter {
 		this._commandTimeoutTimer && clearInterval(this._commandTimeoutTimer)
 		delete this._commandTimeoutTimer
 	}
-  /** */
+	/** */
 	// private _onUnhandledCommandTimeout () {
 	// 	global.clearTimeout(this._commandTimeoutTimer)
 	// 	this.emit(SocketConnectionEvent.TIMEOUT)
 	// }
 
-  /** */
+	/** */
 	private _onConnected () {
 		this._client.emit(SocketConnectionEvent.ALIVE)
 		// global.clearInterval(this._connectionAttemptTimer)
@@ -340,13 +340,13 @@ export class MosSocketClient extends EventEmitter {
 		this.connected = true
 	}
 
-  /** */
+	/** */
 	private _onData (data: Buffer) {
 		this._client.emit(SocketConnectionEvent.ALIVE)
 		// data = Buffer.from(data, 'ucs2').toString()
 		let messageString: string = iconv.decode(data, 'utf16-be').trim()
 
-		this.emit('rawMessage','recieved', messageString)
+		this.emit('rawMessage', 'recieved', messageString)
 		if (this._debug) console.log(`${this._description} Received: ${messageString}`)
 
 		let firstMatch = '<mos>' // <mos>
@@ -445,7 +445,7 @@ export class MosSocketClient extends EventEmitter {
 		this.processQueue()
 	}
 
-  /** */
+	/** */
 	private _onError (error: Error) {
 		// dispatch error!!!!!
 		this.emit('error', `Socket event error: ${error.message}`)
@@ -457,7 +457,7 @@ export class MosSocketClient extends EventEmitter {
 		this.connected = false
 		// this._readyToSendMessage = false
 		if (hadError) {
-			this.emit('warning', 'Scoket closed with error')
+			this.emit('warning', 'Socket closed with error')
 			if (this._debug) console.log('Socket closed with error')
 		} else {
 			if (this._debug) console.log('Socket closed without error')

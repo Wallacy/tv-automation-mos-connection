@@ -35,7 +35,7 @@ interface RoReqStoryDelete extends BaseOptions {
 
 interface RoReqStoryMove extends BaseOptions {
 	action: 'MOVE'
-	storyID: MosString128
+	storyID?: MosString128
 	itemID?: MosString128
 	targetStoryID?: MosString128
 	targetItemID?: MosString128
@@ -103,11 +103,10 @@ export class RoReqStoryAction extends MosMessage {
 				const { storyID, itemID, targetItemID, targetStoryID } = this.options
 
 				if (itemID) {
-					addTextElement(source, 'storyID', storyID)
 					addTextElement(source, 'itemID', itemID)
 					targetStoryID && addTextElement(target, 'storyID', targetStoryID)
 					targetItemID && addTextElement(target, 'itemID', targetItemID)
-				} else {
+				} else if (storyID) {
 					addTextElement(source, 'storyID', storyID)
 					targetStoryID && addTextElement(target, 'storyID', targetStoryID)
 				}

@@ -28,9 +28,9 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 	private _lowerSocketServer?: MosSocketServer
 	private _upperSocketServer?: MosSocketServer
 	private _querySocketServer?: MosSocketServer
-	private _incomingSockets: {[sockedId: string]: SocketDescription} = {}
-	private _ncsConnections: {[host: string]: NCSServerConnection} = {}
-	private _mosDevices: {[ncsID: string]: MosDevice} = {}
+	private _incomingSockets: { [sockedId: string]: SocketDescription } = {}
+	private _ncsConnections: { [host: string]: NCSServerConnection } = {}
+	private _mosDevices: { [ncsID: string]: MosDevice } = {}
 	private _initialized: boolean = false
 	private _isListening: boolean = false
 
@@ -58,14 +58,14 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 		if (this._conf.acceptsConnections) {
 			return new Promise((resolve, reject) => {
 				this._initiateIncomingConnections()
-				.then(() => {
-					this._isListening = true
-					resolve(true)
-				})
-				.catch((err) => {
-					// this.emit('error', err)
-					reject(err)
-				})
+					.then(() => {
+						this._isListening = true
+						resolve(true)
+					})
+					.catch((err) => {
+						// this.emit('error', err)
+						reject(err)
+					})
 			})
 		}
 		return Promise.resolve(false)
@@ -198,15 +198,15 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 			)
 		})
 		return Promise.all(disposePromises0)
-		.then(() => {
-			return Promise.all(disposePromises1)
-		})
-		.then(() => {
-			return Promise.all(disposePromises2)
-		})
-		.then(() => {
-			return
-		})
+			.then(() => {
+				return Promise.all(disposePromises1)
+			})
+			.then(() => {
+				return Promise.all(disposePromises2)
+			})
+			.then(() => {
+				return
+			})
 	}
 	/** Return a specific MOS-device */
 	getDevice (id: string): MosDevice {
@@ -239,14 +239,14 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 		}
 		if (this._mosDevices[id0]) {
 			return this._mosDevices[id0].dispose()
-			.then(() => {
-				delete this._mosDevices[id0]
-			})
+				.then(() => {
+					delete this._mosDevices[id0]
+				})
 		} else if (id1 && this._mosDevices[id1]) {
 			return this._mosDevices[id1].dispose()
-			.then(() => {
-				delete this._mosDevices[id1 || '']
-			})
+				.then(() => {
+					delete this._mosDevices[id1 || '']
+				})
 		} else {
 			return Promise.reject('Device not found')
 		}
@@ -330,9 +330,9 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 
 		let handleListen = (socketServer: MosSocketServer) => {
 			return socketServer.listen()
-			.then(() => {
-				this.emit('info', 'Listening on port ' + socketServer.port + ' (' + socketServer.portDescription + ')')
-			})
+				.then(() => {
+					this.emit('info', 'Listening on port ' + socketServer.port + ' (' + socketServer.portDescription + ')')
+				})
 		}
 		return Promise.all(
 			[
@@ -405,14 +405,16 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 					let mosDevice = this._mosDevices[ncsID + '_' + mosID] || this._mosDevices[mosID + '_' + ncsID]
 
 					let sendReply = (message: MosMessage) => {
-						message.ncsID = ncsID
-						message.mosID = mosID
-						message.prepare(mosMessageId)
-						const messageString: string = message.toString()
-						const buf = iconv.encode(messageString, 'utf16-be')
-						client.socket.write(buf, 'utf16-be')
+						if (client.socket) {
+							message.ncsID = ncsID
+							message.mosID = mosID
+							message.prepare(mosMessageId)
+							const messageString: string = message.toString()
+							const buf = iconv.encode(messageString, 'utf16-be')
+							client.socket.write(buf, 'utf16-be')
 
-						this.emit('rawMessage', 'incoming_' + socketID, 'sent', messageString)
+							this.emit('rawMessage', 'incoming_' + socketID, 'sent', messageString)
+						}
 					}
 					if (!mosDevice && this._conf.openRelay) {
 						// No MOS-device found in the register

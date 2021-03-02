@@ -57,7 +57,7 @@ export namespace XMLROFullStory {
 			items.forEach((item) => {
 				let bodyItem: IMOSROFullStoryBodyItem = {
 					Type: 'storyItem',
-					Content: item
+					Content: XMLMosItem.fromXML(item)
 				}
 				body.push(bodyItem)
 			})
