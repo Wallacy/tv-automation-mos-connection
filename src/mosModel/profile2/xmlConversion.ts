@@ -54,7 +54,7 @@ export namespace XMLMosROAck {
 			}
 			if (xmlItemIDs[i]) {
 				item = {
-					ID: new MosString128(xmlStoryIDs[i]),
+					ID: new MosString128(xmlItemIDs[i]),
 					Channel: new MosString128(''),
 					Objects: []
 				}
@@ -87,7 +87,7 @@ export namespace XMLRunningOrderBase {
 		if (xml.hasOwnProperty('mosExternalMetadata') && !isEmpty(xml.mosExternalMetadata)) {
 			// TODO: Handle an array of mosExternalMetadata
 			let meta: IMOSExternalMetaData = {
-				MosSchema: '' ,
+				MosSchema: '',
 				MosPayload: xml.mosExternalMetadata.mosPayload
 			}
 
@@ -256,7 +256,7 @@ export namespace XMLMosExternalMetaData {
 					xmlmd.hasOwnProperty('mosScope') && !isEmpty(xmlmd.mosScope)
 						? xmlmd.mosScope
 						: null,
-				MosSchema:  typeof xmlmd.mosSchema === 'string' ? xmlmd.mosSchema : '',
+				MosSchema: typeof xmlmd.mosSchema === 'string' ? xmlmd.mosSchema : '',
 				MosPayload: _fixPayload(xmlmd.mosPayload)
 			}
 			return md
