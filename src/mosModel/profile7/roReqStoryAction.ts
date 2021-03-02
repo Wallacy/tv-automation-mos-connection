@@ -96,8 +96,6 @@ export class RoReqStoryAction extends MosMessage {
 					addTextElement(target, 'itemID', item.ID)
 					XMLMosItem.toXML(source, item)
 				}
-
-				xmlStorySend.importDocument(target)
 				break
 			}
 
@@ -125,7 +123,6 @@ export class RoReqStoryAction extends MosMessage {
 				if (itemID) {
 					addTextElement(target, 'storyID', storyID)
 					addTextElement(source, 'itemID', itemID)
-					xmlStorySend.importDocument(source)
 				} else {
 					addTextElement(source, 'storyID', storyID)
 				}

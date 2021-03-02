@@ -87,11 +87,15 @@ export namespace XMLRunningOrderBase {
 		if (xml.hasOwnProperty('mosExternalMetadata') && !isEmpty(xml.mosExternalMetadata)) {
 			// TODO: Handle an array of mosExternalMetadata
 			let meta: IMOSExternalMetaData = {
-				MosSchema: `${xml.mosExternalMetadata.mosSchema}` ,
+				MosSchema: '' ,
 				MosPayload: xml.mosExternalMetadata.mosPayload
 			}
-			if (
-				xml.mosExternalMetadata.hasOwnProperty('mosScope') &&
+
+			if (typeof xml.mosExternalMetadata.mosSchema === 'string') {
+				meta.MosSchema = xml.mosExternalMetadata.mosSchema
+			}
+
+			if (xml.mosExternalMetadata.hasOwnProperty('mosScope') &&
 				!isEmpty(xml.mosExternalMetadata.mosScope)
 			) {
 				meta.MosScope = xml.mosExternalMetadata.mosScope
@@ -252,7 +256,7 @@ export namespace XMLMosExternalMetaData {
 					xmlmd.hasOwnProperty('mosScope') && !isEmpty(xmlmd.mosScope)
 						? xmlmd.mosScope
 						: null,
-				MosSchema: `${xmlmd.mosSchema}`,
+				MosSchema:  typeof xmlmd.mosSchema === 'string' ? xmlmd.mosSchema : '',
 				MosPayload: _fixPayload(xmlmd.mosPayload)
 			}
 			return md

@@ -20,7 +20,7 @@ export class MosExternalMetaData {
 
 	constructor (obj: IMOSExternalMetaData) {
 		this._scope = obj.MosScope
-		this._schema = `${obj.MosSchema}`
+		this._schema = obj.MosSchema
 		this._payload = obj.MosPayload
 	}
 
