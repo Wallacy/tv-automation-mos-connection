@@ -42,9 +42,6 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 	constructor (configOptions: IConnectionConfig) {
 		super()
 		this._conf = new ConnectionConfig(configOptions)
-		MosConnection.CONNECTION_PORT_LOWER = this._conf.ports.lower
-		MosConnection.CONNECTION_PORT_UPPER = this._conf.ports.upper
-		MosConnection.CONNECTION_PORT_QUERY = this._conf.ports.query
 
 		if (this._conf.debug) {
 			this._debug = this._conf.debug
@@ -104,9 +101,18 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 				this.emit('info', 'primary: ' + str)
 			})
 
-			primary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_LOWER, 'lower', true)
-			primary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_UPPER, 'upper', true)
-			if (!connectionOptions.primary.dontUseQueryPort) primary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_QUERY, 'query', false)
+			let pLower = MosConnection.CONNECTION_PORT_LOWER
+			let pUpper = MosConnection.CONNECTION_PORT_UPPER
+			let pQuery = MosConnection.CONNECTION_PORT_QUERY
+			if (connectionOptions.primary.ports) {
+				pLower = connectionOptions.primary.ports.lower
+				pUpper = connectionOptions.primary.ports.upper
+				pQuery = connectionOptions.primary.ports.query
+			 }
+
+			primary.createClient(MosConnection.nextSocketID, pLower, 'lower', true)
+			primary.createClient(MosConnection.nextSocketID, pUpper, 'upper', true)
+			if (!connectionOptions.primary.dontUseQueryPort) primary.createClient(MosConnection.nextSocketID, pQuery, 'query', false)
 
 			if (connectionOptions.secondary) {
 				secondary = new NCSServerConnection(
@@ -129,9 +135,19 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 				secondary.on('info', (str: string) => {
 					this.emit('info', 'secondary: ' + str)
 				})
-				secondary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_LOWER, 'lower', true)
-				secondary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_UPPER, 'upper', true)
-				if (!connectionOptions.primary.dontUseQueryPort) secondary.createClient(MosConnection.nextSocketID, MosConnection.CONNECTION_PORT_QUERY, 'query', false)
+
+				let sLower = MosConnection.CONNECTION_PORT_LOWER
+				let sUpper = MosConnection.CONNECTION_PORT_UPPER
+				let sQuery = MosConnection.CONNECTION_PORT_QUERY
+				if (connectionOptions.secondary.ports) {
+					sLower = connectionOptions.secondary.ports.lower
+					sUpper = connectionOptions.secondary.ports.upper
+					sQuery = connectionOptions.secondary.ports.query
+				}
+
+				secondary.createClient(MosConnection.nextSocketID, sLower, 'lower', true)
+				secondary.createClient(MosConnection.nextSocketID, sUpper, 'upper', true)
+				if (!connectionOptions.primary.dontUseQueryPort) secondary.createClient(MosConnection.nextSocketID, sQuery, 'query', false)
 			}
 
 			// Initialize mosDevice:
@@ -324,9 +340,9 @@ export class MosConnection extends EventEmitter implements IMosConnection {
 			return socketServer
 		}
 
-		this._lowerSocketServer = initSocket(MosConnection.CONNECTION_PORT_LOWER, 'lower')
-		this._upperSocketServer = initSocket(MosConnection.CONNECTION_PORT_UPPER, 'upper')
-		this._querySocketServer = initSocket(MosConnection.CONNECTION_PORT_QUERY, 'query')
+		this._lowerSocketServer = initSocket(this._conf.ports.lower || MosConnection.CONNECTION_PORT_LOWER, 'lower')
+		this._upperSocketServer = initSocket(this._conf.ports.upper || MosConnection.CONNECTION_PORT_UPPER, 'upper')
+		this._querySocketServer = initSocket(this._conf.ports.query || MosConnection.CONNECTION_PORT_QUERY, 'query')
 
 		let handleListen = (socketServer: MosSocketServer) => {
 			return socketServer.listen()
