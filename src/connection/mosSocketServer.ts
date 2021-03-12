@@ -39,10 +39,10 @@ export class MosSocketServer extends EventEmitter {
 		// close server
 		closePromises.push(
 			new Promise((resolve) => {
-				// this._socketServer.on('close', resolve)
-				this._socketServer.close(() => {
-					resolve()
-				})
+				// 
+				this._socketServer.on('close', resolve)
+				this._socketServer.close()//  Keep-Alive connection may take more time to disconnect after the close event;
+				setImmediate(() => this._socketServer && this._socketServer.emit('close')) // This will help shutdown Keep-Alive connections without having to keep track of the connections or having to force them closed;
 			})
 		)
 		// close any server connections:
