@@ -7,7 +7,7 @@ export class MosString128 {
 	}
 	/** */
 	toString (): string {
-		return this._str
+		return this._str !== 'undefined' ? String(this._str) : ''
 	}
 
 	/** */
@@ -24,7 +24,7 @@ export class MosString128 {
 				this._str = JSON.stringify(str)
 			}
 		} else {
-			this._str = str !== `undefined` ? String(str) : ''
+			this._str = str !== 'undefined' ? String(str) : ''
 		}
 		this._validate()
 	}
